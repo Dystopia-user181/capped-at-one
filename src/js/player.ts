@@ -14,15 +14,36 @@ type FileEvent = Event & { target: FileEventTarget };
 export const Player = {
 	defaultStart(): PlayerType {
 		return {
+			antimatter: 0.1,
+			monomensions: {
+				antimatter: {
+					1: { amount: 0, bought: 0 },
+					2: { amount: 0, bought: 0 },
+					3: { amount: 0, bought: 0 },
+					4: { amount: 0, bought: 0 },
+					5: { amount: 0, bought: 0 },
+					6: { amount: 0, bought: 0 },
+					7: { amount: 0, bought: 0 },
+					8: { amount: 0, bought: 0 },
+					unlocks: 1,
+					tickspeed: 0,
+					sacrifice: 0,
+					surge: {
+						monoId: 1,
+						boost: 0
+					},
+				},
+			},
 			options: {
 				autosave: 1,
 				exportCount: 0,
 			},
-			vitalMarker: "igj2023-scarlet-newyear-cppedatone",
+			currentTab: "antimatter",
+			vitalMarker: Player.storageKey,
 			migrations: migrations.length
 		};
 	},
-	storageKey: "igj2023-scarlet-newyear-cppedatone",
+	storageKey: "igj2023-scarlet-newyear-cappedatone",
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	load(playerObj?: any) {
 		Object.assign(player, Player.defaultStart());
@@ -38,8 +59,16 @@ export const Player = {
 		}
 	},
 	loadSave() {
-		const save = localStorage.getItem(this.storageKey);
-		this.load(save ? JSON.parse(save) : undefined);
+		try {
+			const save = localStorage.getItem(this.storageKey);
+			this.load(save ? JSON.parse(save) : undefined);
+		} catch {
+			this.load();
+			Modals.message.showText(`
+			The game is unable to save, possibly because you are in incognito. Please export your save
+			manually before closing the game.
+			`);
+		}
 	},
 	savePlayer() {
 		if (player.vitalMarker !== Player.storageKey) return;

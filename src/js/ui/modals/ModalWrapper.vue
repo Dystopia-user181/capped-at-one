@@ -1,18 +1,5 @@
 <script setup lang="ts">
-import { Modals } from "@/js/ui/modals";
-
-
-const emit = defineEmits(["confirm", "cancel"]);
-
-function confirm() {
-	closeModal();
-	emit("confirm");
-}
-
-function cancel() {
-	closeModal();
-	emit("cancel");
-}
+import { Modals } from ".";
 
 function closeModal() {
 	if (!Modals.isOpen) return;
@@ -36,24 +23,6 @@ function closeModal() {
 			</span>
 		</div>
 		<slot />
-		<div class="c-modal__bottom-row-buttons">
-			<button
-				class="c-modal__option-button c-tint c-tint--green"
-				@click="confirm"
-			>
-				<slot name="confirmText">
-					Confirm
-				</slot>
-			</button>
-			<button
-				class="c-modal__option-button c-tint c-tint--red"
-				@click="cancel"
-			>
-				<slot name="cancelText">
-					Cancel
-				</slot>
-			</button>
-		</div>
 	</div>
 </template>
 
@@ -74,14 +43,5 @@ function closeModal() {
 .c-modal__title {
 	font-size: 2em;
 	font-weight: bold;
-}
-
-.c-modal__bottom-row-buttons {
-	display: flex;
-	justify-content: space-around;
-}
-
-.c-modal__option-button {
-	width: 150px;
 }
 </style>

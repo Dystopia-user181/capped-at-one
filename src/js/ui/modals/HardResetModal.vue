@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Modals } from "@/js/ui/modals";
+import ModalWrapperConfirm from "./ModalWrapperConfirm.vue";
+
 import { Player } from "@/js/player";
 
-import ModalWrapperConfirm from "./ModalWrapperConfirm.vue";
+import { Modals } from ".";
 </script>
 
 <template>

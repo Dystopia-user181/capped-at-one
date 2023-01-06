@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { player, Player } from "@/js/player";
-import { Modals } from "@/js/ui/modals";
-
 import ModalWrapper from "./ModalWrapper.vue";
+
+import { player, Player } from "@/js/player";
+
+import { Modals } from ".";
+
 
 // https://github.com/microsoft/TypeScript/issues/31816#issuecomment-593069149
 type FileEventTarget = EventTarget & { files: FileList };
@@ -82,5 +84,9 @@ function toggleOption(option: keyof typeof player.options) {
 	font-size: 18px;
 	margin: 3px;
 	vertical-align: middle;
+}
+
+.c-settings-button:hover {
+	box-shadow: 0 0 10px 1px white;
 }
 </style>

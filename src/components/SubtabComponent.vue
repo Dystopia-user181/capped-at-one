@@ -1,11 +1,10 @@
 <script setup lang="ts">
-interface Props {
+const { subtabs } = defineProps<{
 	subtabs: {
 		name: string,
 		buttonClass: Record<string, boolean>
 	}[]
-}
-const { subtabs } = defineProps<Props>();
+}>();
 
 const currentTab = $ref(0);
 
@@ -17,7 +16,7 @@ const emit = defineEmits(["changeTab"]);
 		<button
 			v-for="(subtab, id) of subtabs"
 			:key="id"
-			class="c-tab-button"
+			class="c-tab-button c-button-unspecified"
 			:class="[{ 'c-tab-button--current': currentTab === id }, subtab.buttonClass]"
 
 			@click="() => {
@@ -44,6 +43,8 @@ const emit = defineEmits(["changeTab"]);
 }
 
 .c-tab-button--current {
-	background-color: #ffffff33;
+	background-color: white;
+	cursor: default;
+	color: black;
 }
 </style>

@@ -38,10 +38,15 @@
 		}
 	},
 	"rules": {
+		/* Anything to do with `any` has way too many false positives as a side effect of how
+		incremental games are almost inherently cyclic */
+		"@typescript-eslint/no-unsafe-assignment": "off",
+		"@typescript-eslint/no-unsafe-return": "off",
+
 		"@typescript-eslint/ban-ts-comment": "off",
 		"@typescript-eslint/no-unused-vars": ["error"],
 		"import/prefer-default-export": "off",
-		"import/no-unresolved": "error",
+		"import/no-unresolved": "off",
 		"import/named": "error",
 		"import/namespace": "error",
 		"import/default": "error",
@@ -54,13 +59,6 @@
 		"import/newline-after-import": "warn",
 		"import/no-named-default": "warn",
 		"import/no-self-import": "warn",
-		"import/order": [
-			"warn",
-			{
-				"newlines-between": "always-and-inside-groups",
-				"pathGroups": [{ "pattern": "@/**", "group": "sibling" }]
-			}
-		],
 		"sort-imports": [
 			"warn",
 			{
@@ -141,7 +139,7 @@
 		"wrap-iife": "error",
 		"yoda": "error",
 		"no-label-var": "error",
-		"no-shadow": "error",
+		"no-shadow": "off",
 		"no-shadow-restricted-names": "error",
 		"no-undef": "off",
 		"no-unused-vars": "off",

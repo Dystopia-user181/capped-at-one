@@ -6,6 +6,8 @@ import { LogicEvent } from "@/js/database/events";
 import { Modals } from "@/js/ui/modals";
 import { UIEvent } from "@/js/ui/events";
 
+import { AMHandler } from "@/js/antimatter";
+
 let lastTick = Date.now();
 
 export function gameLoop(_diff?: number) {
@@ -13,11 +15,11 @@ export function gameLoop(_diff?: number) {
 	if (_diff) {
 		diff = _diff;
 	} else {
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		diff = (Date.now() - lastTick) / 1000;
 		lastTick = Date.now();
 	}
 	LogicEvent.dispatch("GAME_TICK_BEFORE");
+	AMHandler.tick(diff);
 	GameUI.update();
 	LogicEvent.dispatch("GAME_TICK_AFTER");
 }

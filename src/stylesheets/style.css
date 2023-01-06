@@ -2,6 +2,10 @@
 	color: #fff;
 	background-color: #242424;
 
+	--colour-antimatter: #df5050;
+	--colour-good: #1bbb36;
+	--colour-bad: #b84b5f;
+
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -41,24 +45,40 @@ body {
 
 button {
 	border-radius: 8px;
-	border: 1px solid transparent;
+	border: none;
 	padding: 10px 15px;
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
-	background-color: #1a1a1a;
 	color: #ffffff;
+	transition: background-color 0.2s, border 0.2s, box-shadow 0.2s;
 	cursor: pointer;
-	transition: border-color 0.25s;
 	outline: none;
-}
-button:hover {
-	border-color: #fff;
+	background-color: rgba(255, 255, 255, 0.2);
+	border: 1px solid white;
 }
 
-.disabled {
+.c-button-good {
+	background-color: #004400;
+	border: 1px solid var(--colour-good);
+}
+
+.c-button-good:hover {
+	box-shadow: 0 0 10px 1px var(--colour-good);
+}
+
+.c-button-unspecified:hover {
+	box-shadow: 0 0 10px 1px white;
+}
+
+.disabled, button:disabled {
 	cursor: not-allowed;
-	opacity: 0.5;
+	background-color: #440000;
+	border: 1px solid var(--colour-bad);
+}
+
+.disabled:hover, button:disabled:hover {
+	box-shadow: 0 0 10px 1px var(--colour-bad);
 }
 
 .c-emphasise-text {

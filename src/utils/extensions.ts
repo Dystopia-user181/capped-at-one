@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AnyFunction, isArray, isObject } from "./types";
 
 export function nonNegativeMod(n: number, m: number) {

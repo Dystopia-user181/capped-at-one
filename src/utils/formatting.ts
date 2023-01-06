@@ -1,12 +1,13 @@
 export function format(
 	value : number,
 	places = 2,
-	placesUnder1000 = 2,
-	small = false
+	placesUnder1000 = 3,
+	small = true
 ) {
+	if (value === Infinity) return "Infinity";
 	if (value === 0)
 		return (0).toFixed(placesUnder1000);
-	if (Math.log10(value) < -1 && small) {
+	if (Math.log10(value) < -2 && small) {
 		const e = Math.floor(Math.log10(value) + Number.EPSILON);
 		return `${Math.min(value / Math.pow(10, e), 10 - Math.pow(0.1, places)).toFixed(places)}e${e}`;
 	}
@@ -16,11 +17,11 @@ export function format(
 	return `${Math.min(value / Math.pow(10, e), 10 - Math.pow(0.1, places)).toFixed(places)}e${e}`;
 }
 
-export function formatX(value : number, places = 2, placesUnder1000 = 2) {
+export function formatX(value : number, places = 2, placesUnder1000 = 3) {
 	return `×${format(value, places, placesUnder1000)}`;
 }
 
-export function formatPow(value : number, places = 2, placesUnder1000 = 2) {
+export function formatPow(value : number, places = 2, placesUnder1000 = 3) {
 	return `^${format(value, places, placesUnder1000)}`;
 }
 
@@ -30,4 +31,23 @@ export function formatPercents(value : number, places = 2) {
 
 export function formatInt(x : number) {
 	return format(x, 2, 0, false);
+}
+
+export function formatOrder(value: number) {
+	let suffix = "th";
+	const x = Math.round(value);
+	if (x % 100 < 10 || x % 100 >= 20) {
+		switch (x % 10) {
+			case 1:
+				suffix = "st";
+				break;
+			case 2:
+				suffix = "nd";
+				break;
+			case 3:
+				suffix = "rd";
+				break;
+		}
+	}
+	return `${x}${suffix}`;
 }

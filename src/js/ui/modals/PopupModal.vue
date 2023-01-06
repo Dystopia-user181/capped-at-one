@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Component } from "vue";
-
-import { Modal, Modals } from "@/js/ui/modals";
+import type { Component } from "vue";
 
 import { onMount } from "@/components/mixins";
+
+import { Modal, Modals } from ".";
+
 
 const { modal } = defineProps<{
 	modal: Modal<Component>

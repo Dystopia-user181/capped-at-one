@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Modals } from "@/js/ui/modals";
-
 import ModalWrapper from "./ModalWrapper.vue";
+
+import { Modals } from ".";
 
 function hide() {
 	if (!Modals.isOpen) return;
@@ -21,7 +21,10 @@ function hide() {
 			v-html="Modals.message.text.value"
 		/>
 		<br><br>
-		<button @click="hide">
+		<button
+			class="c-button-good"
+			@click="hide"
+		>
 			Okay
 		</button>
 	</modal-wrapper>

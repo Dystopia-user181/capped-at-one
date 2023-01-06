@@ -1,9 +1,9 @@
 import { AllowedComponentProps, Component, ref, shallowRef, ShallowRef, VNodeProps } from "vue";
 
-import HardResetModal from "@/components/modals/HardResetModal.vue";
-import InfoModal from "@/components/modals/InfoModal.vue";
-import MessageModal from "@/components/modals/MessageModal.vue";
-import SettingsModal from "@/components/modals/SettingsModal.vue";
+import HardResetModal from "./HardResetModal.vue";
+import InfoModal from "./InfoModal.vue";
+import MessageModal from "./MessageModal.vue";
+import SettingsModal from "./SettingsModal.vue";
 
 // https://stackoverflow.com/a/73784241/17814082
 // Dear god
