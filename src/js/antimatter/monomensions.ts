@@ -3,7 +3,8 @@ import { AntimatterRebuyableState } from "./antimatter-rebuyable-state";
 import { AMHandler } from ".";
 import { SacrificeHandler } from "./sacrifice";
 import { SurgeHandler } from "./surge";
-import { TickspeedUpgrade } from "./tickspeed";
+
+import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
 import { player } from "@/js/player";
 
@@ -34,12 +35,15 @@ export class AntimatterMonomensionState extends AntimatterRebuyableState<OneToEi
 		base *= Math.pow(0.1, player.monomensions.antimatter.unlocks);
 		if (this.isCurrent) base *= SacrificeHandler.effect;
 		if (SurgeHandler.selectedMono === this.id) base *= SurgeHandler.effect;
+		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.amMult, 1);
 		return base;
 	}
 
 	get effect() {
 		if (!this.isUnlocked) return 0;
-		return this.amount * this.multiplier * TickspeedUpgrade.effect;
+		let base = this.amount * this.multiplier;
+		base *= AMHandler.timeSpeedupFactor;
+		return base;
 	}
 
 	get production() { return this.effect; }
@@ -47,10 +51,6 @@ export class AntimatterMonomensionState extends AntimatterRebuyableState<OneToEi
 	get cost() {
 		if (this.bought >= 1 || !this.isCurrent) return Infinity;
 		return baseCosts[this.id - 1] * Math.pow(scaling[this.id - 1], this.bought);
-	}
-
-	get isPurchaseable() {
-		return player.antimatter < AMHandler.cap;
 	}
 
 	handlePurchase() {

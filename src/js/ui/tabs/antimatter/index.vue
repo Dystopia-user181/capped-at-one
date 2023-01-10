@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import AntimatterMonomensionRow from "./AntimatterMonomensionRow.vue";
+import DilationPanel from "./DilationPanel.vue";
 import SacrificeMenu from "./SacrificeMenu.vue";
 import SurgeMenu from "./SurgeMenu.vue";
 import TickspeedRow from "./TickspeedRow.vue";
 
 import { AMHandler } from "@/js/antimatter";
+
 import { player } from "@/js/player";
 
 import { format, formatX } from "@/utils";
@@ -16,9 +18,10 @@ import { format, formatX } from "@/utils";
 		<span class="c-game-header__antimatter">
 			{{ format(player.antimatter) }} / {{ format(AMHandler.cap) }}
 		</span>
-		(+{{ format(AMHandler.antimatterPerSec) }}/s) antimatter.
+		(+{{ format(AMHandler.antimatterPerSec) }}/s) antimatter
 	</div>
 	Global slowdown factor: {{ formatX(Math.pow(0.1, player.monomensions.antimatter.unlocks)) }}
+	<DilationPanel />
 	<br>
 	<br>
 	<TickspeedRow />
@@ -41,8 +44,8 @@ import { format, formatX } from "@/utils";
 
 <style scoped>
 .c-game-header__antimatter {
-    font-size: 25px;
-    color: var(--colour-antimatter);
+	font-size: 25px;
+	color: var(--colour-antimatter);
 }
 
 .c-dimboost-button {

@@ -34,6 +34,20 @@ export const Player = {
 					},
 				},
 			},
+			time: {
+				reversing: false,
+				tachyonMatter: 0,
+				upgrades: 0,
+				chosenUpgrade: 0,
+				rebuyables: [0, 0, 0, 0],
+				rebuyablesEnabled: [true, true, true, true],
+			},
+			glyphs: {
+				glyphPower: 0,
+				current: null,
+				previous: null,
+				projected: null,
+			},
 			options: {
 				autosave: 1,
 				exportCount: 0,

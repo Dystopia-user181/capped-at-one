@@ -1,7 +1,13 @@
 import AntimatterTab from "./antimatter/index.vue";
+import DilationTab from "./time/index.vue";
+
+import { TimeDilationHandler } from "@/js/time";
+
+import { GlyphHandler } from "@/js/glyphs";
+
 import { player } from "@/js/player";
 
-export const TabTypes = ["antimatter", "infinity"] as const;
+export const TabTypes = ["antimatter", "dilation", "glyphs"] as const;
 export type TabType = typeof TabTypes[number];
 
 interface TabStateConfig {
@@ -41,11 +47,17 @@ export const Tabs = {
 		name: "Antimatter",
 		component: AntimatterTab
 	}),
-	infinity: new TabState({
-		id: "infinity",
-		name: "Infinity",
+	dilation: new TabState({
+		id: "dilation",
+		name: "Dilation",
+		component: DilationTab,
+		isUnlocked: () => TimeDilationHandler.isUnlocked
+	}),
+	glyphs: new TabState({
+		id: "glyphs",
+		name: "Glyphs",
 		component: AntimatterTab,
-		isUnlocked() { return false; }
+		isUnlocked: () => GlyphHandler.isUnlocked
 	}),
 } as Record<TabType, TabState>;
 

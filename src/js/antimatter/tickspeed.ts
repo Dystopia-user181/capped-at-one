@@ -2,6 +2,8 @@ import { AMHandler } from ".";
 import { AntimatterMonomension } from "./monomensions";
 import { AntimatterRebuyableState } from "./antimatter-rebuyable-state";
 
+import { TimeRebuyables } from "@/js/time";
+
 import { player } from "@/js/player";
 
 export const TickspeedUpgrade = new (class extends AntimatterRebuyableState<undefined> {
@@ -12,8 +14,14 @@ export const TickspeedUpgrade = new (class extends AntimatterRebuyableState<unde
 		return player.monomensions.antimatter.unlocks >= 2;
 	}
 
+	get freeAmount() {
+		let base = 0;
+		base += TimeRebuyables.freeTickspeed.effectOrDefault(0);
+		return base;
+	}
+
 	get effect() {
-		return Math.pow(1.2, this.amount);
+		return Math.pow(1.2, this.amount + this.freeAmount);
 	}
 
 	get cost() {

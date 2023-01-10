@@ -23,14 +23,14 @@ import { format, formatOrder, formatX } from "@/utils";
 					'c-button-good': SurgeHandler.selectedMono === i,
 					'c-button-unspecified': SurgeHandler.selectedMono !== i
 				}"
-				:disabled="SurgeHandler.selectedMono !== i && SurgeHandler.boostAmount > 0"
+				:disabled="SurgeHandler.selectedMono !== i && !SurgeHandler.canSwitch"
 				@click="SurgeHandler.selectedMono = i;"
 			>
 				{{ formatOrder(i) }}
 			</button>
 		</div>
 		<br>
-		<span v-if="SurgeHandler.boostAmount > 0">
+		<span v-if="SurgeHandler.effectiveBoostAmount > 0">
 			Currently: {{ formatX(SurgeHandler.effect) }} to the
 			{{ formatOrder(SurgeHandler.selectedMono) }} Anti Monomension
 		</span>
@@ -40,7 +40,10 @@ import { format, formatOrder, formatX } from "@/utils";
 			:disabled="!SurgeHandler.canSurge"
 			@click="SurgeHandler.doSurge()"
 		>
-			<template v-if="SurgeHandler.canSurge">
+			<template v-if="SurgeHandler.isAlwaysActive">
+				Surge is always active
+			</template>
+			<template v-else-if="SurgeHandler.canSurge">
 				Activate surge
 			</template>
 			<template v-else>

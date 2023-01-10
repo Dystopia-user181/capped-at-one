@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { AMHandler } from "@/js/antimatter";
 import { TickspeedUpgrade } from "@/js/antimatter/tickspeed";
 
 import { format, formatX } from "@/utils";
@@ -16,7 +17,7 @@ import { format, formatX } from "@/utils";
 			</span>
 		</span>
 		<span class="c-tickspeed-row__amount">
-			{{ formatX(TickspeedUpgrade.effect) }}
+			Time speed: {{ formatX(AMHandler.timeSpeedupFactor) }}
 		</span>
 		<div class="c-tickspeed-row__buy">
 			<button

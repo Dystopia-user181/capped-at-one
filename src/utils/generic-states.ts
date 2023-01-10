@@ -39,3 +39,21 @@ export abstract class RebuyableState<C, E = number> extends BuyableState<C, E> {
 		this.amount++;
 	}
 }
+
+export abstract class BitUpgradeState<C extends { id: number }, E = number> extends BuyableState<C, E> {
+	abstract get bits(): number;
+	abstract set bits(v: number);
+
+	get id() { return this.config.id; }
+
+	get isBought() { return (this.bits & (1 << this.id)) > 0; }
+
+	get isDisabled() { return false; }
+	get canApply() { return this.isBought && !this.isDisabled; }
+
+	get canAfford() { return super.canAfford && !this.isBought; }
+
+	handlePurchase() {
+		this.bits |= 1 << this.id;
+	}
+}
