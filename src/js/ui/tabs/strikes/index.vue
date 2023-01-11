@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { player } from "@/js/player";
 
-import { format } from "@/utils";
+import { format, formatOrder } from "@/utils";
 
 const unlocks = $computed(() => player.monomensions.antimatter.unlocks);
 </script>
@@ -20,7 +20,7 @@ const unlocks = $computed(() => player.monomensions.antimatter.unlocks);
 	<br>
 	<br>
 	<template v-if="unlocks < 8">
-		Next at {{ unlocks + 1 }} strikes
+		Next at {{ formatOrder(unlocks + 1) }} Anti Monomensions unlocked
 		<br>
 	</template>
 	<br>
