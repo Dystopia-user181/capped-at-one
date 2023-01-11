@@ -2,6 +2,8 @@ import { AntimatterMonomension } from "@/js/antimatter/monomensions";
 
 import { TimeDilationHandler, TimeRebuyables, TimeUpgrades } from ".";
 
+import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
+
 import { player } from "@/js/player";
 
 export const TimeReversal = {
@@ -16,6 +18,7 @@ export const TimeReversal = {
 		let base = 0.1;
 		base *= TimeUpgrades.tpActive.effectOrDefault(1);
 		base *= Math.pow(TimeDilationHandler.dilationFactor, TimeRebuyables.gainBasedOnDil.effect);
+		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.tachMult, 1);
 		return base;
 	},
 	tick(diff: number) {

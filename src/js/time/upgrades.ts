@@ -1,6 +1,6 @@
 import { TimeDilationHandler } from "./dilation";
 
-import { GlyphHandler } from "@/js/glyphs";
+import { GlyphEffect, GlyphEffectHandler, GlyphHandler } from "@/js/glyphs";
 
 import { player } from "@/js/player";
 
@@ -68,7 +68,11 @@ export class TimeRebuyable<E = number> extends RebuyableState<TimeRebuyableConfi
 		player.time.rebuyablesEnabled[this.id] = !player.time.rebuyablesEnabled[this.id];
 	}
 
-	get cost() { return run(this.config.cost, this.amount); }
+	get cost() {
+		return run(this.config.cost, this.amount) /
+			GlyphEffectHandler.effectOrDefault(GlyphEffect.timeBuyableCost, 1);
+	}
+
 	get effect() {
 		if (!this.config.effect) throw Error(`Accessed effect where unimplemented for TimeRebuyable ${this.id}`);
 		return run(this.config.effect, this.amount);

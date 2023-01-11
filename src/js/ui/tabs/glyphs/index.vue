@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import CurrentGlyphs from "./CurrentGlyphs.vue";
+import GlyphUnlock from "./GlyphUnlock.vue";
 import ProjectedGlyph from "./ProjectedGlyph.vue";
 
-import { GlyphHandler } from "@/js/glyphs";
+import { GlyphHandler, GlyphUnlocks } from "@/js/glyphs";
 
 import { player } from "@/js/player";
 
@@ -20,6 +21,14 @@ import { format } from "@/utils";
 		Glyph Power
 	</div>
 	<br>
+	<div class="c-glyph-unlocks-container">
+		<GlyphUnlock
+			v-for="(_, i) in GlyphUnlocks"
+			:key="'glyph-unlock-' + i"
+			:upg-name="i"
+		/>
+	</div>
+	<br>
 	<ProjectedGlyph />
 	<br>
 	<CurrentGlyphs />
@@ -31,10 +40,11 @@ import { format } from "@/utils";
 	color: var(--colour-glyphs);
 }
 
-.c-glyph-container--projected {
+.c-glyph-unlocks-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	max-width: 920px;
 	margin: auto;
-	border: 2px solid white;
-	background-color: rgba(255, 255, 255, 0.1);
-	border-radius: 10px;
 }
 </style>
