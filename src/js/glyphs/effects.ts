@@ -2,7 +2,7 @@ import { GlyphHandler, GlyphType } from ".";
 
 import { player } from "@/js/player";
 
-import { format, formatPercents } from "@/utils";
+import { format, formatPercents, formatX } from "@/utils";
 
 export enum GlyphEffect {
 	// Antimatter
@@ -14,31 +14,32 @@ export enum GlyphEffect {
 	// Time
 	tachMult,
 	timeBuyableCost,
+	tachMultBySac,
 }
 
 export const GlyphEffects = {
 	[GlyphType.antimatter]: [{
 		id: GlyphEffect.amMult,
 		description: (x: number) => `Multiply all Anti Monomensions by ${format(x)}`,
-		effect: (x: number) => Math.pow(3 + x, 1.5),
+		effect: (x: number) => Math.pow(3 + x, 2),
 	},
 	{
 		id: GlyphEffect.tickMult,
 		description: (x: number) => `Increase effectiveness of tickspeed by ${formatPercents(x)}`,
-		// https://www.desmos.com/calculator/iwiddbaozx
-		effect: (x: number) => Math.log10(x + 1) / 10 + 0.02,
+		effect: (x: number) => Math.log10(x + 1) / 5 + 0.03,
 	},
 	{
 		id: GlyphEffect.amPow,
 		description: (x: number) => `Raise all Mono multipliers to ^${format(1 / x)} if < 1
 		and ^${format(x)} if > 1`,
-		effect: (x: number) => 1.05 * Math.pow(x + 1, 0.2),
+		effect: (x: number) => 1.02 * Math.pow(x + 1, 0.2),
 	},
 	{
 		id: GlyphEffect.dilNerf,
 		description: (x: number) => `Dilation effect is moved ${format(x)} orders of magnitude later`,
-		effect: (x: number) => 5 + 4 * x,
+		effect: (x: number) => 8 + 4 * x,
 	}],
+
 	[GlyphType.time]: [{
 		id: GlyphEffect.tachMult,
 		description: (x: number) => `Multiply Tachyon Matter gain by ${format(x)}`,
@@ -48,6 +49,11 @@ export const GlyphEffects = {
 		id: GlyphEffect.timeBuyableCost,
 		description: (x: number) => `Divide repeatable Time upgrade costs by ${format(x)}`,
 		effect: (x: number) => (x * x) / 10 + x + 4,
+	},
+	{
+		id: GlyphEffect.tachMultBySac,
+		description: (x: number) => `Multiply Tachyon Matter gain by ln(sac pts + 1)${formatX(x)}`,
+		effect: (x: number) => (x + Math.sqrt(x * 0.7) + 1)
 	}],
 	[GlyphType.infinity]: [],
 };

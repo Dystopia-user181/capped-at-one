@@ -26,7 +26,7 @@ const unlocks = $computed(() => player.monomensions.antimatter.unlocks);
 	<br>
 	<template v-if="unlocks >= 5">
 		<h2>Strike 1</h2>
-		Time is dilated based on Antimatter
+		Time is dilated based on log(AM + starting AM) - log(starting AM)
 		<br>
 		Unlock Time Reversal
 		<br>

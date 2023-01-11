@@ -34,7 +34,7 @@ export const SurgeHandler = {
 	get effectiveBoostAmount() {
 		if (TimeUpgrades.surgeIdle.canApply) return 1;
 		let base = this.boostAmount;
-		if (TimeUpgrades.surgeActive.canApply) base = Math.pow(base, 1.5);
+		if (TimeUpgrades.surgeActive.canApply) base = Math.pow(base, 1.3);
 		return base;
 	},
 	get effect() {
