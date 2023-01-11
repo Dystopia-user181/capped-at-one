@@ -1,21 +1,28 @@
+import { GlyphGenerator } from "./generator";
+
+import { TimeUpgrades } from "@/js/time";
+
 import { player } from "@/js/player";
 
-export type { GlyphData } from "./glyph-types";
-export { GlyphEffectHandler, GlyphEffect } from "./effects";
-export { GlyphType, GlyphTypes } from "./glyph-types";
+export * from "./glyph-types";
+export * from "./generator";
+export * from "./effects";
+export * from "./unlocks";
 
 export const GlyphHandler = {
 	get isUnlocked() {
 		return player.monomensions.antimatter.unlocks >= 6;
 	},
 
+	get powerPerTick() {
+		let base = 0.015;
+		base *= TimeUpgrades.glyphPowStatic.effectOrDefault(1);
+		base *= TimeUpgrades.glyphPowDynamic.effectOrDefault(1);
+		return base;
+	},
 	tick(diff: number) {
 		if (!this.isUnlocked) return;
-		player.glyphs.glyphPower = Math.min(player.glyphs.glyphPower + 0.01 * diff, 1);
+		player.glyphs.glyphPower = Math.min(player.glyphs.glyphPower + this.powerPerTick * diff, 1);
+		if (player.glyphs.glyphPower >= 1) GlyphGenerator.makeNewGlyph();
 	},
-
-	newRarity() {
-		const rng = Math.random();
-		return Math.pow(rng, 0.3) * 0.35 + Math.pow(rng, 10) * 0.2;
-	}
 };

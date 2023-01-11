@@ -20,7 +20,7 @@ import { format, formatX } from "@/utils";
 		</span>
 		(+{{ format(AMHandler.antimatterPerSec) }}/s) antimatter
 	</div>
-	Global slowdown factor: {{ formatX(Math.pow(0.1, player.monomensions.antimatter.unlocks)) }}
+	Weight of unlocks: {{ formatX(1 / AMHandler.slowdownFactor) }} to Monomension multipliers
 	<DilationPanel />
 	<br>
 	<br>
@@ -38,7 +38,7 @@ import { format, formatX } from "@/utils";
 		class="c-dimboost-button c-button-good"
 		@click="AMHandler.reset()"
 	>
-		Reset your Antimatter and Antimatter Monomensions and slow down the game tenfold, but unlock Something New
+		Reset your Antimatter and carry the Weight of an Unlock, but unlock Something New
 	</button>
 </template>
 

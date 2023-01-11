@@ -1,5 +1,7 @@
 import { TimeDilationHandler } from "./dilation";
 
+import { GlyphHandler } from "@/js/glyphs";
+
 import { player } from "@/js/player";
 
 import { BitUpgradeState, format, formatInt, formatX, RebuyableState, run } from "@/utils";
@@ -16,7 +18,7 @@ interface TimeUpgradeConfig<E> {
 	effect?: (() => E) | E,
 	isUnlocked?: () => boolean,
 
-	description: (() => string) | string,
+	description: ((x: TimeUpgrade<E>) => string) | (() => string) | string,
 }
 
 export class TimeUpgrade<E = number> extends BitUpgradeState<TimeUpgradeConfig<E>, E> {
@@ -36,7 +38,7 @@ export class TimeUpgrade<E = number> extends BitUpgradeState<TimeUpgradeConfig<E
 
 	get isDisabled() { return !TimeDilationHandler.isUnlocked || player.time.chosenUpgrade !== this.id; }
 
-	get description() { return run(this.config.description); }
+	get description() { return run(this.config.description, this); }
 	select() { player.time.chosenUpgrade = this.id; }
 }
 
@@ -122,6 +124,22 @@ export const TimeUpgrades = {
 
 		description: `Sacrifice point gain is raised ^1.200 (Works before 1)`
 	}),
+	glyphPowStatic: new TimeUpgrade({
+		id: 6,
+		cost: 1e4,
+		effect: 2,
+		isUnlocked: () => GlyphHandler.isUnlocked,
+
+		description: `Double glyph power gain`
+	}),
+	glyphPowDynamic: new TimeUpgrade({
+		id: 7,
+		cost: 1e4,
+		effect: () => Math.log10(player.time.tachyonMatter + 10) / 2.4,
+		isUnlocked: () => GlyphHandler.isUnlocked,
+
+		description: (upg: TimeUpgrade) => `${formatX(upg.effect)} glyph power gain based on Tachyon Matter`
+	}),
 };
 
 export const TimeRebuyables = (function() {
@@ -163,7 +181,7 @@ export const TimeRebuyables = (function() {
 		dilNerf: new TimeRebuyable({
 			id: 3,
 			cost: x => Math.pow(3, Math.pow(x, 1.05)) * 50,
-			effect: x => 2 / (Math.pow(x, 1.6) / 10 + x + 2),
+			effect: x => 2 / (x + 2),
 			isToggleable,
 
 			description(upg) {

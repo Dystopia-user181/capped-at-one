@@ -13,7 +13,7 @@ import { format, formatX } from "@/utils";
 		<span class="c-tickspeed-row__identifier">
 			<span>Tickspeed:</span>
 			<span class="c-tickspeed-row__multiplier-text">
-				{{ formatX(1.2) }} / upgrade
+				{{ formatX(TickspeedUpgrade.perUpgrade) }} / upgrade
 			</span>
 		</span>
 		<span class="c-tickspeed-row__amount">

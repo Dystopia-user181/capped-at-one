@@ -55,8 +55,8 @@ import { format, formatOrder, formatX } from "@/utils";
 
 <style scoped>
 .c-surge-row {
-	width: 60%;
-	max-width: 500px;
+	width: 80%;
+	max-width: 600px;
 	padding: 10px 30px;
 	margin: auto;
 	margin-top: 20px;

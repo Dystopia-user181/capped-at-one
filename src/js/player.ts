@@ -44,6 +44,7 @@ export const Player = {
 			},
 			glyphs: {
 				glyphPower: 0,
+				unlocks: 0,
 				current: null,
 				previous: null,
 				projected: null,
@@ -97,7 +98,7 @@ export const Player = {
 			.toISOString().split("T")[0]} ${new Date().toLocaleTimeString(undefined, { hour12: false })}`;
 		player.options.exportCount++;
 		downloadAsFile(
-			`Antimatter Monomentions Save #${player.options.exportCount} (${dateString})`,
+			`Antimatter Monomensions Save #${player.options.exportCount} (${dateString})`,
 			window.btoa(JSON.stringify(toRaw(player)))
 		);
 	},

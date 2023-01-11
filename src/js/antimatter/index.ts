@@ -44,12 +44,16 @@ export const AMHandler = {
 	get baseAM() {
 		return baseCosts[player.monomensions.antimatter.unlocks - 1];
 	},
+	get slowdownFactor() {
+		return Math.pow(player.monomensions.antimatter.unlocks >= 6 ? 30 : 10, player.monomensions.antimatter.unlocks);
+	},
 
 	reset() {
 		player.monomensions.antimatter.unlocks++;
 		player.antimatter = this.baseAM;
 		player.monomensions.antimatter.tickspeed = 0;
 		player.monomensions.antimatter.sacrifice = 0;
+		player.time.tachyonMatter = 0;
 		SurgeHandler.boostAmount = 0;
 		for (let i = 1; i <= 8; i++) AntimatterMonomension(i).reset();
 	}

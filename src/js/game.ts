@@ -8,6 +8,8 @@ import { UIEvent } from "@/js/ui/events";
 
 import { AMHandler } from "@/js/antimatter";
 
+import { GlyphHandler } from "./glyphs";
+
 let lastTick = Date.now();
 
 export function gameLoop(_diff?: number) {
@@ -20,6 +22,7 @@ export function gameLoop(_diff?: number) {
 	}
 	LogicEvent.dispatch("GAME_TICK_BEFORE");
 	AMHandler.tick(diff);
+	GlyphHandler.tick(diff);
 	GameUI.update();
 	LogicEvent.dispatch("GAME_TICK_AFTER");
 }

@@ -4,6 +4,8 @@ import { AntimatterRebuyableState } from "./antimatter-rebuyable-state";
 
 import { TimeRebuyables } from "@/js/time";
 
+import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
+
 import { player } from "@/js/player";
 
 export const TickspeedUpgrade = new (class extends AntimatterRebuyableState<undefined> {
@@ -20,12 +22,19 @@ export const TickspeedUpgrade = new (class extends AntimatterRebuyableState<unde
 		return base;
 	}
 
+	get perUpgrade() {
+		let base = 1.2;
+		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.tickMult, 0) + 1;
+		return base;
+	}
+
 	get effect() {
-		return Math.pow(1.2, this.amount + this.freeAmount);
+		return Math.pow(this.perUpgrade, this.amount + this.freeAmount);
 	}
 
 	get cost() {
-		return AMHandler.baseAM * 0.1 * Math.pow(8, this.amount);
+		const effectiveAmt = player.monomensions.antimatter.unlocks >= 6 ? Math.pow(this.amount, 1.2) : this.amount;
+		return AMHandler.baseAM * 0.1 * Math.pow(8, effectiveAmt);
 	}
 
 	get isPurchaseable() {

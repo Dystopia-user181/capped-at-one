@@ -32,10 +32,12 @@ export class AntimatterMonomensionState extends AntimatterRebuyableState<OneToEi
 
 	get multiplier() {
 		let base = 1;
-		base *= Math.pow(0.1, player.monomensions.antimatter.unlocks);
+		base /= AMHandler.slowdownFactor;
 		if (this.isCurrent) base *= SacrificeHandler.effect;
 		if (SurgeHandler.selectedMono === this.id) base *= SurgeHandler.effect;
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.amMult, 1);
+		if (base < 1) base = Math.pow(base, 1 / GlyphEffectHandler.effectOrDefault(GlyphEffect.amPow, 1));
+		else base = Math.pow(base, GlyphEffectHandler.effectOrDefault(GlyphEffect.amPow, 1));
 		return base;
 	}
 

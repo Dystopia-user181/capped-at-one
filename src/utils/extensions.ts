@@ -161,6 +161,19 @@ export function hasOwn<RecordKeys extends string | number | symbol>(
 	return Object.prototype.hasOwnProperty.call(record, property);
 }
 
+export function enumAsArray<T extends object>(anEnum: T): T[keyof T][] {
+	return Object.keys(anEnum)
+		.map(n => Number.parseInt(n, 10))
+		.filter(n => !Number.isNaN(n)) as T[keyof T][];
+}
+
+export function randomEnum<T extends object>(anEnum: T): T[keyof T] {
+	const enumValues = enumAsArray(anEnum);
+	const randomIndex = Math.floor(Math.random() * enumValues.length);
+	const randomEnumValue = enumValues[randomIndex];
+	return randomEnumValue;
+}
+
 class Str {
 	public string: string;
 
@@ -183,6 +196,10 @@ class Arr<T> {
 
 	get last() {
 		return this.array.at(-1);
+	}
+
+	get random() {
+		return this.array[Math.floor(this.array.length * Math.random())];
 	}
 
 	findLast(predicate: (value: T, index: number) => boolean) {
