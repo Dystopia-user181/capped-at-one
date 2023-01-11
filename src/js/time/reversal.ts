@@ -19,7 +19,7 @@ export const TimeReversal = {
 		base *= TimeUpgrades.tpActive.effectOrDefault(1);
 		base *= Math.pow(TimeDilationHandler.dilationFactor, TimeRebuyables.gainBasedOnDil.effect);
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.tachMult, 1);
-		base *= Math.log(player.monomensions.antimatter.sacrifice) *
+		base *= Math.log(player.monomensions.antimatter.sacrifice + 1) *
 			GlyphEffectHandler.effectOrDefault(GlyphEffect.tachMultBySac, 0) + 1;
 		return base;
 	},
