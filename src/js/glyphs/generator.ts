@@ -80,6 +80,6 @@ export const GlyphSacrificeHandler = {
 	},
 	rarityBoost(type: GlyphType) {
 		const x = player.glyphs.sacrifice[type];
-		return (1 - Math.exp(1 - Math.log(x ** 0.8 / 100 + Math.E) ** 3)) * 0.55;
+		return (1 - Math.exp(1 - Math.log(x ** 0.9 / 100 + Math.E) ** 3)) * 0.55;
 	},
 };

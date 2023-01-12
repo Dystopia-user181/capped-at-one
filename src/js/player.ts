@@ -28,6 +28,8 @@ export const Player = {
 					7: { amount: 0, bought: 0 },
 					8: { amount: 0, bought: 0 },
 					unlocks: 1,
+					maxUnlocks: 1,
+					timeElapsed: 0,
 					tickspeed: 0,
 					sacrifice: 0,
 					surge: {

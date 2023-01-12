@@ -11,6 +11,8 @@ export interface PlayerType {
 	monomensions: {
 		antimatter: Dimset<AntimatterMonoData> & {
 			unlocks: OneToEight,
+			maxUnlocks: OneToEight,
+			timeElapsed: number,
 			tickspeed: number,
 			sacrifice: number,
 			surge: {
