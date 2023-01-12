@@ -56,7 +56,7 @@ const displayedMono = AntimatterMonomension(dimId);
 	grid-template-columns: repeat(7, 1fr);
 	padding: 5px 5px 5px 10px;
 	margin: auto;
-	height: 52px;
+	height: 60px;
 }
 
 .c-monomensions-row--current {

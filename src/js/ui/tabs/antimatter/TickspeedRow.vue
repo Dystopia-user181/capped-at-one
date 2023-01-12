@@ -2,7 +2,7 @@
 import { AMHandler } from "@/js/antimatter";
 import { TickspeedUpgrade } from "@/js/antimatter/tickspeed";
 
-import { format, formatX } from "@/utils";
+import { format, formatInt, formatX } from "@/utils";
 </script>
 
 <template>
@@ -11,7 +11,11 @@ import { format, formatX } from "@/utils";
 		class="c-tickspeed-row"
 	>
 		<span class="c-tickspeed-row__identifier">
-			<span>Tickspeed:</span>
+			<span>Tickspeed ({{
+				TickspeedUpgrade.amount
+			}}{{
+				TickspeedUpgrade.freeAmount ? ` + ${formatInt(TickspeedUpgrade.freeAmount)}` : ""
+			}})</span>
 			<span class="c-tickspeed-row__multiplier-text">
 				{{ formatX(TickspeedUpgrade.perUpgrade) }} / upgrade
 			</span>
