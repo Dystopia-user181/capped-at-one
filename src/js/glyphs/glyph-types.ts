@@ -1,16 +1,16 @@
 import { GlyphUnlockHandler } from "./unlocks";
 
 export enum GlyphType {
-	antimatter,
+	power,
 	time,
 	infinity,
 }
 
 export const GlyphTypes = {
-	[GlyphType.antimatter]: {
-		name: "Antimatter",
+	[GlyphType.power]: {
+		name: "Power",
 		colour: "#22aa48",
-		symbol: "A",
+		symbol: "P",
 		isUnlocked: true,
 	},
 	[GlyphType.time]: {

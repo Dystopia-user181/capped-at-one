@@ -18,7 +18,7 @@ export enum GlyphEffect {
 }
 
 export const GlyphEffects = {
-	[GlyphType.antimatter]: [{
+	[GlyphType.power]: [{
 		id: GlyphEffect.amMult,
 		description: (x: number) => `Multiply all Anti Monomensions by ${format(x)}`,
 		effect: (x: number) => Math.pow(3 + x, 2),

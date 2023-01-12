@@ -48,7 +48,7 @@ export const Player = {
 				glyphPower: 0,
 				unlocks: 0,
 				sacrifice: {
-					[GlyphType.antimatter]: 0,
+					[GlyphType.power]: 0,
 					[GlyphType.time]: 0,
 					[GlyphType.infinity]: 0,
 				},

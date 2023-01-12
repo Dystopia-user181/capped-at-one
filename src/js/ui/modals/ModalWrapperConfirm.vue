@@ -35,7 +35,10 @@ function closeModal() {
 				<slot name="header" />
 			</span>
 		</div>
+		<br>
 		<slot />
+		<br>
+		<br>
 		<div class="c-modal__bottom-row-buttons">
 			<button
 				class="c-modal__option-button c-button-good"
