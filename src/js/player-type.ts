@@ -1,5 +1,7 @@
 import { AntimatterMonoData } from "@/js/antimatter/player-types";
-import { GlyphData } from "@/js/glyphs";
+
+import { GlyphData, GlyphType } from "@/js/glyphs";
+
 import { TabType } from "@/js/ui/tabs";
 
 type Dimset<T> = { 1: T, 2: T, 3: T, 4: T, 5: T, 6: T, 7: T, 8: T };
@@ -28,6 +30,7 @@ export interface PlayerType {
 	glyphs: {
 		glyphPower: number,
 		unlocks: number,
+		sacrifice: Record<GlyphType, number>,
 		current: GlyphData | null,
 		previous: GlyphData | null,
 		projected: GlyphData | null,

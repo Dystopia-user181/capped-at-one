@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import GlyphComponent from "./GlyphComponent.vue";
 
-import { GlyphGenerator } from "@/js/glyphs";
+import { GlyphGenerator, GlyphSacrificeHandler } from "@/js/glyphs";
 
 import { player } from "@/js/player";
 
@@ -47,8 +47,14 @@ import { formatInt, formatPercents } from "@/utils";
 			{{ player.glyphs.projected ? formatPercents(player.glyphs.projected.rarity) : "???" }}
 			<br>
 			<br>
-			Using a new Glyph will replace your backup Glyph with your current one and your current glyph with the
-			new one. Discarding a new Glyph refunds 25% of the Glyph Power cost.
+			<span class="c-glyph-h2p">
+				Using a new Glyph will replace your backup Glyph with your current one and your current glyph
+				with the new one. Discarding a new Glyph refunds 25% of the Glyph Power cost {{
+					GlyphSacrificeHandler.isUnlocked
+						? "and gives the corresponding Glyph's Sacrifice Points"
+						: ""
+				}}.
+			</span>
 		</div>
 	</div>
 </template>
@@ -59,7 +65,6 @@ import { formatInt, formatPercents } from "@/utils";
 	align-items: center;
 	height: 350px;
 	max-width: 700px;
-	margin: auto;
 	border: 2px solid white;
 	background-color: rgba(255, 255, 255, 0.1);
 	border-radius: 10px;
@@ -93,5 +98,10 @@ import { formatInt, formatPercents } from "@/utils";
 .c-projected-glyph-info__progress-bar-progress {
 	height: 100%;
 	background-color: var(--colour-glyphs);
+}
+
+.c-glyph-h2p {
+	font-size: 13px;
+	line-height: 20px;
 }
 </style>

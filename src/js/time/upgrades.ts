@@ -46,6 +46,7 @@ interface TimeRebuyableConfig<E> {
 	id: number,
 	cost: (amt: number) => number,
 	effect?: ((amt: number) => E) | E,
+	cap?: (() => number) | number,
 	isToggleable?: boolean,
 
 	description: ((x: TimeRebuyable<E>) => string) | (() => string) | string,
@@ -56,6 +57,8 @@ export class TimeRebuyable<E = number> extends RebuyableState<TimeRebuyableConfi
 
 	get amount() { return player.time.rebuyables[this.id]; }
 	set amount(v) { player.time.rebuyables[this.id] = v; }
+
+	get cap() { return run(this.config.cap) ?? Infinity; }
 
 	get currencyAmount() { return player.time.tachyonMatter; }
 	set currencyAmount(v) { player.time.tachyonMatter = v; }
@@ -153,6 +156,7 @@ export const TimeRebuyables = (function() {
 			id: 0,
 			cost: x => Math.pow(2, Math.pow(x, 1.23)) * 5,
 			effect: x => Math.pow(x / 4.5, 0.7),
+			cap: 20,
 
 			description(upg) {
 				return `Gain more Tachyon Matter based on time dilation
@@ -164,6 +168,7 @@ export const TimeRebuyables = (function() {
 			id: 1,
 			cost: x => Math.pow(3, x) * 20,
 			effect: x => Math.pow(x + 1, 5),
+			cap: 30,
 
 			description(upg) {
 				return `Increase Sacrifice Point gain
@@ -175,6 +180,7 @@ export const TimeRebuyables = (function() {
 			id: 2,
 			cost: x => Math.pow(2, x) * 10,
 			effect: x => x,
+			cap: 40,
 
 			description(upg) {
 				return `Get a free tickspeed upgrade
@@ -186,6 +192,7 @@ export const TimeRebuyables = (function() {
 			id: 3,
 			cost: x => Math.pow(3, Math.pow(x, 1.05)) * 50,
 			effect: x => 2 / (x + 2),
+			cap: 20,
 			isToggleable,
 
 			description(upg) {

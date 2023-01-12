@@ -1,5 +1,7 @@
 import { reactive, toRaw } from "vue";
 
+import { GlyphType } from "@/js/glyphs";
+
 import { PlayerType } from "@/js/player-type";
 
 import { migrations } from "@/js/migrations";
@@ -45,6 +47,11 @@ export const Player = {
 			glyphs: {
 				glyphPower: 0,
 				unlocks: 0,
+				sacrifice: {
+					[GlyphType.antimatter]: 0,
+					[GlyphType.time]: 0,
+					[GlyphType.infinity]: 0,
+				},
 				current: null,
 				previous: null,
 				projected: null,

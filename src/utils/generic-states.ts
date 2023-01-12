@@ -32,6 +32,11 @@ export abstract class BuyableState<C, E = number> extends Effect<C, E> {
 export abstract class RebuyableState<C, E = number> extends BuyableState<C, E> {
 	get canApply() { return true; }
 
+	get cap() { return Infinity; }
+	get isCapped() { return this.amount >= this.cap; }
+
+	get canAfford() { return super.canAfford && !this.isCapped; }
+
 	abstract get amount(): number;
 	abstract set amount(v: number);
 

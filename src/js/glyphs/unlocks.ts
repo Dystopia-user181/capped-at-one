@@ -35,6 +35,15 @@ export const GlyphUnlocks = {
 		description: "Unlock Time Glyphs",
 		currencyDisplay: "Tachyon Matter",
 	}),
+	glyphSac: new GlyphUnlockState({
+		id: 1,
+		get currency() { return player.monomensions.antimatter.sacrifice; },
+		set currency(v) { player.monomensions.antimatter.sacrifice = v; },
+		cost: 2e3,
+
+		description: "Unlock Glyph Sacrifice",
+		currencyDisplay: "Sacrifice Points",
+	}),
 };
 
 export const GlyphUnlockHandler = {

@@ -13,13 +13,22 @@ const upgrade = TimeRebuyables[upgName];
 <template>
 	<div class="c-time-rebuyable-wrapper">
 		<button
-			class="c-time-rebuyable c-button-good"
-			:disabled="!upgrade.canAfford"
+			:class="{
+				'c-time-rebuyable': true,
+				'c-time-rebuyable--capped': upgrade.isCapped,
+				'c-button-good': !upgrade.isCapped,
+			}"
+			:disabled="!upgrade.canAfford && !upgrade.isCapped"
 			@click="upgrade.buy();"
 		>
 			<span v-html="upgrade.description" />
 			<br>
-			Cost: {{ format(upgrade.cost, 2, 2) }} Tachyon Matter
+			<template v-if="!upgrade.isCapped">
+				Cost: {{ format(upgrade.cost, 2, 2) }} Tachyon Matter
+			</template>
+			<template v-else>
+				(Capped)
+			</template>
 		</button>
 		<button
 			v-if="upgrade.isTogglable"
@@ -50,10 +59,17 @@ const upgrade = TimeRebuyables[upgName];
 	vertical-align: top;
 }
 
-.c-time-rebuyable:not(:disabled) {
+.c-time-rebuyable:not(:disabled):not(.c-time-rebuyable--capped) {
 	background: black;
 	border: 2px solid var(--colour-dilation);
 	color: var(--colour-dilation);
+}
+
+.c-time-rebuyable--capped {
+	background: var(--colour-dilation);
+	border: 2px solid black;
+	color: black;
+	cursor: default;
 }
 
 .c-time-rebuyable__toggle {

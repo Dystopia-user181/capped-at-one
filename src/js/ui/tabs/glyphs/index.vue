@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CurrentGlyphs from "./CurrentGlyphs.vue";
+import GlyphSacMenu from "./GlyphSacMenu.vue";
 import GlyphUnlock from "./GlyphUnlock.vue";
 import ProjectedGlyph from "./ProjectedGlyph.vue";
 
@@ -29,7 +30,10 @@ import { format } from "@/utils";
 		/>
 	</div>
 	<br>
-	<ProjectedGlyph />
+	<div class="c-glyph-container--top">
+		<ProjectedGlyph />
+		<GlyphSacMenu />
+	</div>
 	<br>
 	<CurrentGlyphs />
 </template>
@@ -38,6 +42,11 @@ import { format } from "@/utils";
 .c-game-header__glyph-power {
 	font-size: 25px;
 	color: var(--colour-glyphs);
+}
+
+.c-glyph-container--top {
+	display: flex;
+	justify-content: center;
 }
 
 .c-glyph-unlocks-container {
