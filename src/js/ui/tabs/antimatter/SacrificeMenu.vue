@@ -35,6 +35,15 @@ import { format, formatOrder, formatX } from "@/utils";
 				{{ formatOrder(player.monomensions.antimatter.unlocks) }} Anti Monomension to sacrifice
 			</template>
 		</button>
+		<template v-if="SacrificeHandler.sacAmount > SacrificeHandler.softcapThreshold">
+			<br>
+			Beyond 1e1e1, Sacrifice Point gain is (softcapped) to sqrt(1e1e1*(2*x - 1e1e1))
+			<br>
+			<i>
+				"Capped at 1, but no one tell what does 1 mean. It can even be 1 thousand.
+				Also no one tell you what does cap mean, a hardcap or a softcap." - 3^3=7
+			</i>
+		</template>
 	</div>
 </template>
 

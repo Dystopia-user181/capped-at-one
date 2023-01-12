@@ -42,7 +42,7 @@ import { format, formatInt, formatX } from "@/utils";
 
 <style scoped>
 .c-tickspeed-row {
-	width: 60%;
+	width: 70%;
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
 	padding: 5px;

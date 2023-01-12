@@ -9,6 +9,9 @@ export const SacrificeHandler = {
 	get canSac() {
 		return player.antimatter >= AMHandler.baseAM && AntimatterMonomension("current").amount > 0;
 	},
+	get softcapThreshold() {
+		return 1e10;
+	},
 	get sacAmount() {
 		if (!this.canSac) return 0;
 		let amount = (player.antimatter - AMHandler.baseAM) * (AntimatterMonomension("current").amount ** 2);
@@ -17,6 +20,8 @@ export const SacrificeHandler = {
 		amount = Math.pow(amount, TimeUpgrades.sacBefore1.effectOrDefault({ power: 1, multiplier: 1 }).power);
 		amount *= TimeUpgrades.sacBefore1.effectOrDefault({ power: 1, multiplier: 1 }).multiplier;
 		amount = Math.pow(amount, TimeUpgrades.sacAfter1.effectOrDefault(1));
+		const softcap = this.softcapThreshold;
+		if (amount > softcap) amount = Math.sqrt(softcap * (2 * amount - softcap));
 		return amount;
 	},
 	doSac() {
