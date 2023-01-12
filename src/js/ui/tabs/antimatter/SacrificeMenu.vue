@@ -2,6 +2,8 @@
 import { AMHandler } from "@/js/antimatter";
 import { SacrificeHandler } from "@/js/antimatter/sacrifice";
 
+import { Modals } from "@/js/ui/modals";
+
 import { player } from "@/js/player";
 
 import { format, formatOrder, formatX } from "@/utils";
@@ -22,7 +24,7 @@ import { format, formatOrder, formatX } from "@/utils";
 		<button
 			class="c-sacrifice-menu__button c-button-good"
 			:disabled="!SacrificeHandler.canSac"
-			@click="SacrificeHandler.doSac()"
+			@click="Modals.sacrifice.show()"
 		>
 			<template v-if="SacrificeHandler.canSac">
 				Reset your Antimatter and Anti Monomensions for {{ format(SacrificeHandler.sacAmount) }}
