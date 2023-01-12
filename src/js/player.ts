@@ -5,7 +5,7 @@ import { PlayerType } from "@/js/player-type";
 import { migrations } from "@/js/migrations";
 import { Modals } from "@/js/ui/modals";
 
-import { deepAssign, downloadAsFile } from "@/utils";
+import { deepAssign, downloadAsFile, isArray, isObject } from "@/utils";
 
 // https://github.com/microsoft/TypeScript/issues/31816#issuecomment-593069149
 type FileEventTarget = EventTarget & { files: FileList };
@@ -85,8 +85,28 @@ export const Player = {
 			`);
 		}
 	},
+	hasNaN(obj: Record<string, unknown> | unknown[] = player) {
+		if (isObject(obj)) {
+			for (const i in obj) {
+				const prop = obj[i];
+				if (typeof prop === "number" && Number.isNaN(prop)) return true;
+				if ((isObject(prop) || isArray(prop)) && this.hasNaN(prop)) return true;
+			}
+		} else {
+			for (const prop of obj) {
+				if (typeof prop === "number" && Number.isNaN(prop)) return true;
+				if ((isObject(prop) || isArray(prop)) && this.hasNaN(prop)) return true;
+			}
+		}
+		return false;
+	},
 	savePlayer() {
 		if (player.vitalMarker !== Player.storageKey) return;
+		if (this.hasNaN()) {
+			// eslint-disable-next-line no-console
+			console.error("Has NaN, didn't save");
+			return;
+		}
 		localStorage.setItem(this.storageKey, JSON.stringify(toRaw(player)));
 	},
 	reset() {
