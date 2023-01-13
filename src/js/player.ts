@@ -46,6 +46,9 @@ export const Player = {
 				rebuyables: [0, 0, 0, 0],
 				rebuyablesEnabled: [true, true, true, true],
 			},
+			auto: {
+				surge: false,
+			},
 			glyphs: {
 				glyphPower: 0,
 				unlocks: 0,

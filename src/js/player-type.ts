@@ -29,6 +29,9 @@ export interface PlayerType {
 		rebuyables: [number, number, number, number],
 		rebuyablesEnabled: [boolean, boolean, boolean, boolean],
 	},
+	auto: {
+		surge: boolean,
+	},
 	glyphs: {
 		glyphPower: number,
 		unlocks: number,

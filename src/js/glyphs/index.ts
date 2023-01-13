@@ -15,7 +15,7 @@ export const GlyphHandler = {
 	},
 
 	get powerPerTick() {
-		let base = 0.015;
+		let base = 0.02;
 		base *= TimeUpgrades.glyphPowStatic.effectOrDefault(1);
 		base *= TimeUpgrades.glyphPowDynamic.effectOrDefault(1);
 		return base;

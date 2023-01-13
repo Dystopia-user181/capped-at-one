@@ -1,3 +1,5 @@
+import { Strikes } from "@/js/strikes";
+
 import { TimeUpgrades } from "@/js/time";
 
 import { player } from "@/js/player";
@@ -43,6 +45,7 @@ export const SurgeHandler = {
 	tick(diff: number) {
 		if (this.isAlwaysActive) return;
 		this.boostAmount = Math.max(this.boostAmount - diff / this.timePerSurge, 0);
+		if (this.boostAmount <= 0 && player.auto.surge && Strikes[2].isUnlocked) this.doSurge();
 	},
 	get isAlwaysActive() {
 		return TimeUpgrades.surgeIdle.canApply;

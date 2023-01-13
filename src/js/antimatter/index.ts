@@ -48,13 +48,31 @@ export const AMHandler = {
 		return Math.pow(player.monomensions.antimatter.unlocks >= 6 ? 30 : 10, player.monomensions.antimatter.unlocks);
 	},
 
-	reset() {
-		player.monomensions.antimatter.unlocks++;
+	_resetResources() {
 		player.antimatter = this.baseAM;
 		player.monomensions.antimatter.tickspeed = 0;
 		player.monomensions.antimatter.sacrifice = 0;
 		player.time.tachyonMatter = 0;
 		SurgeHandler.boostAmount = 0;
 		for (let i = 1; i <= 8; i++) AntimatterMonomension(i).reset();
-	}
+	},
+	ascend() {
+		player.monomensions.antimatter.unlocks++;
+		if (player.monomensions.antimatter.maxUnlocks < player.monomensions.antimatter.unlocks)
+			player.monomensions.antimatter.maxUnlocks = player.monomensions.antimatter.unlocks as OneToEight;
+		this._resetResources();
+	},
+	descend() {
+		player.monomensions.antimatter.unlocks--;
+		this._resetResources();
+	},
+	get minDescensionReached() {
+		return player.monomensions.antimatter.unlocks <= 5;
+	},
+	get maxAscensionReached() {
+		return player.monomensions.antimatter.unlocks >= player.monomensions.antimatter.maxUnlocks;
+	},
+	get descensionTimeBoost() {
+		return player.monomensions.antimatter.unlocks < player.monomensions.antimatter.maxUnlocks ? 10 : 1;
+	},
 };

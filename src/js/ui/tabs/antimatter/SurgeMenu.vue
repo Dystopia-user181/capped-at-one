@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Strikes } from "@/js/strikes";
 import { SurgeHandler } from "@/js/antimatter/surge";
 
 import { player } from "@/js/player";
@@ -29,6 +30,13 @@ import { format, formatOrder, formatX } from "@/utils";
 				{{ formatOrder(i) }}
 			</button>
 		</div>
+		<template v-if="Strikes[2].isUnlocked">
+			Auto-surge: <input
+				v-model="player.auto.surge"
+				type="checkbox"
+			>
+			<br>
+		</template>
 		<br>
 		<span v-if="SurgeHandler.effectiveBoostAmount > 0">
 			Currently: {{ formatX(SurgeHandler.effect) }} to the

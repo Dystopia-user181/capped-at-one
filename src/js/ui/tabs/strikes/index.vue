@@ -36,7 +36,18 @@ const unlocks = $computed(() => player.monomensions.antimatter.unlocks);
 		<h2>Strike 2</h2>
 		Each unlock weighs thirty instead of ten and tickspeed cost scales more
 		<br>
-		Unlock Glyphs
+		Unlock Glyphs and Auto-surge
+		<br>
+		<br>
+	</template>
+	<template v-if="unlocks >= 7">
+		<h2>Strike 3 (UNIMPLEMENTED)</h2>
+		Monomensions cap at one real-life second of production
+		<br>
+		Production is spread out over 500 real-life seconds
+		("0.1 AM/s" would give you 0.05 AM at 250s and 0.1 AM at 500s)
+		<br>
+		Unlock Infinity
 		<br>
 		<br>
 	</template>
