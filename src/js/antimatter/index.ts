@@ -24,7 +24,7 @@ export const AMHandler = {
 		return AntimatterMonomension(1).production;
 	},
 	tick(_diff: number) {
-		if (player.antimatter >= this.cap) return;
+		if (player.antimatter >= this.cap && !TimeReversal.isActive) return;
 		const repeat = TimeReversal.isActive ? Math.max(Math.min(Math.ceil(_diff), 100), 1) : 1;
 		const diff = _diff / repeat;
 		for (let i = 0; i < repeat; i++) {

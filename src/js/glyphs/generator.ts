@@ -72,7 +72,7 @@ export const GlyphSacrificeHandler = {
 	},
 	sacrificeAmount(glyph: GlyphData | null) {
 		if (!glyph) return 0;
-		return Math.sqrt(GlyphEffectHandler.effectiveLevel(glyph)) + 0.2;
+		return Math.sqrt(GlyphEffectHandler.effectiveLevel(glyph)) * 2 + 0.5;
 	},
 	doSac(glyph = player.glyphs.projected) {
 		if (!this.isUnlocked || !glyph) return;

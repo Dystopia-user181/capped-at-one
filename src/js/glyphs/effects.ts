@@ -48,7 +48,7 @@ export const GlyphEffects = {
 	{
 		id: GlyphEffect.timeBuyableCost,
 		description: (x: number) => `Divide repeatable Time upgrade costs by ${format(x)}`,
-		effect: (x: number) => (x * x) / 10 + x + 4,
+		effect: (x: number) => (x * x) / 5 + x * 1.3 + 4,
 	},
 	{
 		id: GlyphEffect.tachMultBySac,
