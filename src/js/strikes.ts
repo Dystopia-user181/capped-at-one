@@ -8,6 +8,6 @@ export const Strikes = {
 		get isUnlocked() { return player.monomensions.antimatter.unlocks >= 6; },
 	},
 	3: {
-		get isUnlocked() { return player.monomensions.antimatter.unlocks >= 7; },
+		get isUnlocked() { return player.monomensions.antimatter.maxUnlocks >= 7; },
 	},
 };

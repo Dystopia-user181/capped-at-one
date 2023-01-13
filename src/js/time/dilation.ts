@@ -1,3 +1,5 @@
+import { Strikes } from "../strikes";
+
 import { AMHandler } from "@/js/antimatter";
 
 import { TimeRebuyables } from ".";
@@ -8,7 +10,7 @@ import { player } from "@/js/player";
 
 export const TimeDilationHandler = {
 	get isUnlocked() {
-		return player.monomensions.antimatter.unlocks >= 5;
+		return Strikes[1].isUnlocked;
 	},
 	get dilationFactor() {
 		if (!this.isUnlocked) return 1;

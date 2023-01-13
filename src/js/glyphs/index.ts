@@ -1,3 +1,5 @@
+import { Strikes } from "@/js/strikes";
+
 import { GlyphGenerator } from "./generator";
 
 import { TimeUpgrades } from "@/js/time";
@@ -11,7 +13,7 @@ export * from "./unlocks";
 
 export const GlyphHandler = {
 	get isUnlocked() {
-		return player.monomensions.antimatter.unlocks >= 6;
+		return Strikes[2].isUnlocked;
 	},
 
 	get powerPerTick() {

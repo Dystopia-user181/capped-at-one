@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { Strikes } from "@/js/strikes";
+
 import { player } from "@/js/player";
 
 import { format, formatOrder } from "@/utils";
 
-const unlocks = $computed(() => player.monomensions.antimatter.unlocks);
+const unlocks = $computed(() => player.monomensions.antimatter.maxUnlocks);
 </script>
 
 <template>
@@ -24,7 +26,7 @@ const unlocks = $computed(() => player.monomensions.antimatter.unlocks);
 		<br>
 	</template>
 	<br>
-	<template v-if="unlocks >= 5">
+	<template v-if="Strikes[1].isUnlocked">
 		<h2>Strike 1</h2>
 		Time is dilated based on log(AM + starting AM) - log(starting AM)
 		<br>
@@ -32,7 +34,7 @@ const unlocks = $computed(() => player.monomensions.antimatter.unlocks);
 		<br>
 		<br>
 	</template>
-	<template v-if="unlocks >= 6">
+	<template v-if="Strikes[2].isUnlocked">
 		<h2>Strike 2</h2>
 		Each unlock weighs thirty instead of ten and tickspeed cost scales more
 		<br>
@@ -40,14 +42,14 @@ const unlocks = $computed(() => player.monomensions.antimatter.unlocks);
 		<br>
 		<br>
 	</template>
-	<template v-if="unlocks >= 7">
+	<template v-if="Strikes[3].isUnlocked">
 		<h2>Strike 3 (UNIMPLEMENTED)</h2>
 		Monomensions cap at one real-life second of production
 		<br>
-		Production is spread out over 500 real-life seconds
-		("0.1 AM/s" would give you 0.05 AM at 250s and 0.1 AM at 500s)
+		Production is spread out over 200 real-life seconds
+		("0.1 AM/s" would give you 0.05 AM at 100s and 0.1 AM at 200s)
 		<br>
-		Unlock Infinity
+		Unlock Infinity and Tachyon Engines
 		<br>
 		<br>
 	</template>

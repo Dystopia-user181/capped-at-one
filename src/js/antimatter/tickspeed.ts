@@ -1,3 +1,5 @@
+import { Strikes } from "@/js/strikes";
+
 import { AMHandler } from ".";
 import { AntimatterMonomension } from "./monomensions";
 import { AntimatterRebuyableState } from "./antimatter-rebuyable-state";
@@ -33,7 +35,7 @@ export const TickspeedUpgrade = new (class extends AntimatterRebuyableState<unde
 	}
 
 	get cost() {
-		const effectiveAmt = player.monomensions.antimatter.unlocks >= 6 ? Math.pow(this.amount, 1.2) : this.amount;
+		const effectiveAmt = Strikes[2].isUnlocked ? Math.pow(this.amount, 1.2) : this.amount;
 		return AMHandler.baseAM * 0.1 * Math.pow(8, effectiveAmt);
 	}
 
