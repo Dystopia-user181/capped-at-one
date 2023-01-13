@@ -16,7 +16,7 @@ import { format, formatOrder, formatX } from "@/utils";
 	>
 		You have {{ format(player.monomensions.antimatter.sacrifice) }} Sacrifice Points, boosting the
 		{{ formatOrder(player.monomensions.antimatter.unlocks) }} Anti Monomension by
-		{{ formatX(SacrificeHandler.effect) }} (x<sup>0.5</sup>)
+		{{ formatX(SacrificeHandler.effect) }} (x<sup>{{ format(SacrificeHandler.sacPow, 2, 2) }}</sup>)
 		<br>
 		Rough sacrifice formula: (AM - {{ format(AMHandler.baseAM) }}) *
 		({{ formatOrder(player.monomensions.antimatter.unlocks) }} mono)<sup>2</sup>
@@ -37,7 +37,7 @@ import { format, formatOrder, formatX } from "@/utils";
 		</button>
 		<template v-if="SacrificeHandler.sacAmount > SacrificeHandler.softcapThreshold">
 			<br>
-			Beyond 1e1e1, Sacrifice Point gain is (softcapped) to sqrt(1e1e1*(2*x - 1e1e1))
+			Beyond 1e10, Sacrifice Point gain is (softcapped) to sqrt(1e10*(2*x - 1e10))
 			<br>
 			<i>
 				"Capped at 1, but no one tell what does 1 mean. It can even be 1 thousand.

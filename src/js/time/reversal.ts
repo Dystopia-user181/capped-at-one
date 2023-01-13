@@ -1,6 +1,7 @@
 import { AntimatterMonomension } from "@/js/antimatter/monomensions";
 
 import { TimeDilationHandler, TimeRebuyables, TimeUpgrades } from ".";
+import { TachyonEngine } from "./engines";
 
 import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
@@ -21,6 +22,8 @@ export const TimeReversal = {
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.tachMult, 1);
 		base *= Math.log(player.monomensions.antimatter.sacrifice + 1) *
 			GlyphEffectHandler.effectOrDefault(GlyphEffect.tachMultBySac, 0) + 1;
+
+		base -= TachyonEngine.consumption;
 		return base;
 	},
 	tick(diff: number) {
@@ -36,5 +39,6 @@ export const TimeReversal = {
 		}
 		if (!this.isActive) return;
 		player.time.tachyonMatter += this.tpPerSec * diff;
+		TachyonEngine.tick(diff);
 	}
 };

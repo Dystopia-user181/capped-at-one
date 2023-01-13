@@ -1,6 +1,3 @@
-
-// Import { player } from "@/js/player";
-
 import { GameUI } from "@/js/ui/game-ui";
 import { LogicEvent } from "@/js/database/events";
 import { Modals } from "@/js/ui/modals";
@@ -9,6 +6,8 @@ import { UIEvent } from "@/js/ui/events";
 import { AMHandler } from "@/js/antimatter";
 
 import { GlyphHandler } from "./glyphs";
+
+import { InfHandler } from "./infinity";
 
 let lastTick = Date.now();
 
@@ -23,6 +22,7 @@ export function gameLoop(_diff?: number) {
 	LogicEvent.dispatch("GAME_TICK_BEFORE");
 	AMHandler.tick(diff);
 	GlyphHandler.tick(diff);
+	InfHandler.tick();
 	GameUI.update();
 	LogicEvent.dispatch("GAME_TICK_AFTER");
 }

@@ -97,7 +97,6 @@
 		"vue/padding-line-between-blocks": "warn",
 		"vue/block-tag-newline": "warn",
 		"vue/no-multiple-objects-in-class": "warn",
-		"vue/no-static-inline-styles": "warn",
 		"vue/no-v-html": "off",
 		"vue/no-multiple-template-root": "off",
 		"vue/no-setup-props-destructure": "off",

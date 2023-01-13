@@ -1,3 +1,5 @@
+import { Strikes } from "@/js/strikes";
+
 import { AMHandler } from ".";
 import { AntimatterMonomension } from "./monomensions";
 
@@ -28,10 +30,14 @@ export const SacrificeHandler = {
 		if (!this.canSac) return;
 		player.monomensions.antimatter.sacrifice += this.sacAmount;
 		player.antimatter = AMHandler.baseAM;
+		player.monomensions.antimatter.timeElapsed = 0;
 		for (let i = 1; i <= 8; i++) AntimatterMonomension(i).reset();
 	},
+	get sacPow() {
+		return Strikes[3].isUnlocked ? 0.25 : 0.5;
+	},
 	effectAtScore(x: number = player.monomensions.antimatter.sacrifice) {
-		return Math.pow(1 + x, 0.5);
+		return Math.pow(1 + x, this.sacPow);
 	},
 	get effect() {
 		return this.effectAtScore();

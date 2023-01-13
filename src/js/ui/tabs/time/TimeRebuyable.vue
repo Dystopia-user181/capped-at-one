@@ -11,7 +11,10 @@ const upgrade = TimeRebuyables[upgName];
 </script>
 
 <template>
-	<div class="c-time-rebuyable-wrapper">
+	<div
+		v-if="upgrade.isUnlocked"
+		class="c-time-rebuyable-wrapper"
+	>
 		<button
 			:class="{
 				'c-time-rebuyable': true,

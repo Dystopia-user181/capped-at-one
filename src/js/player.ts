@@ -37,14 +37,29 @@ export const Player = {
 						boost: 0
 					},
 				},
+				infinity: {
+					1: { amount: 0, bought: 0 },
+					2: { amount: 0, bought: 0 },
+					3: { amount: 0, bought: 0 },
+					4: { amount: 0, bought: 0 },
+					5: { amount: 0, bought: 0 },
+					6: { amount: 0, bought: 0 },
+					7: { amount: 0, bought: 0 },
+					8: { amount: 0, bought: 0 },
+				}
 			},
 			time: {
 				reversing: false,
 				tachyonMatter: 0,
 				upgrades: 0,
 				chosenUpgrade: 0,
-				rebuyables: [0, 0, 0, 0],
-				rebuyablesEnabled: [true, true, true, true],
+				rebuyables: [0, 0, 0, 0, 0],
+				rebuyablesEnabled: [true, true, true, true, true],
+				tachyonEngine: {
+					on: false,
+					level: 0,
+					momentum: 0,
+				}
 			},
 			auto: {
 				surge: false,
@@ -60,6 +75,12 @@ export const Player = {
 				current: null,
 				previous: null,
 				projected: null,
+			},
+			infinity: {
+				ipProgress: 0,
+				bestIP: 0,
+				ip: 0,
+				infPow: 0,
 			},
 			options: {
 				autosave: 1,

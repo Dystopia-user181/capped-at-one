@@ -16,7 +16,7 @@ export const TimeDilationHandler = {
 		if (!this.isUnlocked) return 1;
 		let start = AMHandler.baseAM;
 		start *= Math.pow(10, GlyphEffectHandler.effectOrDefault(GlyphEffect.dilNerf, 0));
-		let base = Math.log10(player.antimatter + start) - Math.log10(start);
+		let base = Math.log10(Math.max(player.antimatter, 0) + start) - Math.log10(start);
 		base *= TimeRebuyables.dilNerf.effectOrDefault(1);
 		return Math.pow(Math.max(base, 0) * 2 + 1, 2);
 	}

@@ -1,3 +1,5 @@
+import { Strikes } from "@/js/strikes";
+
 import { TimeDilationHandler } from "./dilation";
 
 import { GlyphEffect, GlyphEffectHandler, GlyphHandler } from "@/js/glyphs";
@@ -48,6 +50,7 @@ interface TimeRebuyableConfig<E> {
 	effect?: ((amt: number) => E) | E,
 	cap?: (() => number) | number,
 	isToggleable?: boolean,
+	isUnlocked?: () => boolean,
 
 	description: ((x: TimeRebuyable<E>) => string) | (() => string) | string,
 }
@@ -70,6 +73,8 @@ export class TimeRebuyable<E = number> extends RebuyableState<TimeRebuyableConfi
 		if (!this.config.isToggleable) return;
 		player.time.rebuyablesEnabled[this.id] = !player.time.rebuyablesEnabled[this.id];
 	}
+
+	get isUnlocked() { return run(this.config.isUnlocked) ?? true; }
 
 	get cost() {
 		return run(this.config.cost, this.amount) /
@@ -200,6 +205,15 @@ export const TimeRebuyables = (function() {
 				<br>
 				Currently: x${format(upg.effect)}`;
 			}
+		}),
+		tachyonEngine: new TimeRebuyable({
+			id: 4,
+			cost: x => Math.pow(10, Math.pow(x, 1.05)) * 100,
+			effect: x => x,
+			cap: 1,
+			isUnlocked() { return Strikes[3].isUnlocked; },
+
+			description: "Unlock the Tachyon Engine"
 		}),
 	};
 }());

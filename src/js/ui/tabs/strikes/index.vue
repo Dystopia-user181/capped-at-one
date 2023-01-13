@@ -44,12 +44,12 @@ const unlocks = $computed(() => player.monomensions.antimatter.maxUnlocks);
 	</template>
 	<template v-if="Strikes[3].isUnlocked">
 		<h2>Strike 3 (UNIMPLEMENTED)</h2>
-		Monomensions cap at one real-life second of production
+		Monomensions cap at one real-life second of production and sacrifice formula is worse
 		<br>
 		Production is spread out over 200 real-life seconds
 		("0.1 AM/s" would give you 0.05 AM at 100s and 0.1 AM at 200s)
 		<br>
-		Unlock Infinity and Tachyon Engines
+		Unlock Infinity and the Tachyon Engine
 		<br>
 		<br>
 	</template>

@@ -1,5 +1,7 @@
 import { AntimatterMonoData } from "@/js/antimatter/player-types";
 
+import { InfinityMonoData } from "@/js/infinity/player-types";
+
 import { GlyphData, GlyphType } from "@/js/glyphs";
 
 import { TabType } from "@/js/ui/tabs";
@@ -20,14 +22,20 @@ export interface PlayerType {
 				boost: number
 			},
 		},
+		infinity: Dimset<InfinityMonoData>
 	},
 	time: {
 		reversing: boolean,
 		tachyonMatter: number,
 		upgrades: number,
 		chosenUpgrade: number,
-		rebuyables: [number, number, number, number],
-		rebuyablesEnabled: [boolean, boolean, boolean, boolean],
+		rebuyables: [number, number, number, number, number],
+		rebuyablesEnabled: [boolean, boolean, boolean, boolean, boolean],
+		tachyonEngine: {
+			on: boolean,
+			level: number,
+			momentum: number,
+		},
 	},
 	auto: {
 		surge: boolean,
@@ -39,6 +47,12 @@ export interface PlayerType {
 		current: GlyphData | null,
 		previous: GlyphData | null,
 		projected: GlyphData | null,
+	},
+	infinity: {
+		ipProgress: number,
+		bestIP: number,
+		ip: number,
+		infPow: number,
 	},
 	options: {
 		autosave: number,

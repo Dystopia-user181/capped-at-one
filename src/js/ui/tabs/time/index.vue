@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TachyonEngines from "./TachyonEngines.vue";
 import TimeRebuyable from "./TimeRebuyable.vue";
 import TimeUpgrade from "./TimeUpgrade.vue";
 
@@ -36,6 +37,7 @@ import { format, formatX } from "@/utils";
 		</template>
 	</button>
 	<br>
+	<TachyonEngines />
 	<br>
 	<div class="c-time-upgrades-container">
 		<TimeUpgrade
