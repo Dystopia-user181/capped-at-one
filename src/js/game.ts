@@ -22,7 +22,7 @@ export function gameLoop(_diff?: number) {
 	LogicEvent.dispatch("GAME_TICK_BEFORE");
 	AMHandler.tick(diff);
 	GlyphHandler.tick(diff);
-	InfHandler.tick();
+	InfHandler.tick(diff);
 	GameUI.update();
 	LogicEvent.dispatch("GAME_TICK_AFTER");
 }
