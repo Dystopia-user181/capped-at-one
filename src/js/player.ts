@@ -88,6 +88,7 @@ export const Player = {
 				autosave: 1,
 				exportCount: 0,
 			},
+			absolve: 0,
 			currentTab: "antimatter",
 			vitalMarker: Player.storageKey,
 			migrations: migrations.length

@@ -9,6 +9,8 @@ import { Strikes } from "@/js/strikes";
 
 import { AMHandler } from "@/js/antimatter";
 
+import { Absolve } from "@/js/absolve";
+
 import { player } from "@/js/player";
 
 import { format, formatOrder, formatX } from "@/utils";
@@ -46,9 +48,15 @@ const tryAscendConfirm = (function() {
 
 <template>
 	<h1
-		v-if="player.antimatter >= AMHandler.cap && player.monomensions.antimatter.unlocks >= 8"
+		v-if="player.antimatter >= 2"
 	>
-		Congratulations! You've won the game
+		Antimatter <b>DI</b>mensions
+		<br>
+		<br>
+		Congratulations for beating the game!
+		<br>
+		<br>
+		Game made for NYIGJ 2023
 	</h1>
 	<div>
 		You have
@@ -57,13 +65,15 @@ const tryAscendConfirm = (function() {
 		</span>
 		(+{{ format(AMHandler.antimatterPerSec) }}/s) antimatter
 	</div>
-	Weight of unlocks: {{ formatX(1 / AMHandler.slowdownFactor) }} to Monomension multipliers
+	<template v-if="!Absolve.hasFinished">
+		Weight of unlocks: {{ formatX(1 / AMHandler.slowdownFactor) }} to Monomension multipliers
+	</template>
 	<template v-if="player.antimatter >= AMHandler.postInfCap">
 		<br>
 		Reach 1.00 IP to progress to 1.00 Antimatter
 	</template>
 	<DilationPanel />
-	<template v-if="Strikes[3].isUnlocked">
+	<template v-if="Strikes[3].isUnlocked && !Absolve.hasFinished">
 		Time elapsed: {{ format(player.monomensions.antimatter.timeElapsed) }} / {{ format(1) }}
 		<br>
 		<button
@@ -84,7 +94,7 @@ const tryAscendConfirm = (function() {
 	/>
 	<br>
 	<button
-		v-if="Strikes[3].isUnlocked && !AMHandler.minDescensionReached"
+		v-if="Strikes[3].isUnlocked && !AMHandler.minDescensionReached && !Absolve.hasFinished"
 		class="c-dimboost-button c-button-good"
 		@click="tryDescendConfirm()"
 	>
@@ -97,7 +107,7 @@ const tryAscendConfirm = (function() {
 		</template>
 	</button>
 	<button
-		v-if="Strikes[3].isUnlocked && !AMHandler.maxAscensionReached"
+		v-if="Strikes[3].isUnlocked && !AMHandler.maxAscensionReached && !Absolve.hasFinished"
 		class="c-dimboost-button c-button-good"
 		@click="tryAscendConfirm()"
 	>
@@ -111,7 +121,7 @@ const tryAscendConfirm = (function() {
 	</button>
 	<button
 		v-if="player.antimatter >= AMHandler.cap && player.monomensions.antimatter.unlocks < 8 &&
-			player.monomensions.antimatter.unlocks >= player.monomensions.antimatter.maxUnlocks"
+			player.monomensions.antimatter.unlocks >= player.monomensions.antimatter.maxUnlocks && !Absolve.hasFinished"
 		class="c-dimboost-button c-button-good"
 		@click="AMHandler.ascend()"
 	>

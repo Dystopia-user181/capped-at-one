@@ -60,6 +60,7 @@ export interface PlayerType {
 		autosave: number,
 		exportCount: number,
 	},
+	absolve: number,
 	vitalMarker: string,
 	migrations: number,
 	currentTab: TabType,

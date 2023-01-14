@@ -2,6 +2,8 @@ import { Strikes } from "@/js/strikes";
 
 import { TimeUpgrades } from "@/js/time";
 
+import { Absolve } from "@/js/absolve";
+
 import { player } from "@/js/player";
 
 function isDimId(v: number): v is OneToEight {
@@ -25,7 +27,7 @@ export const SurgeHandler = {
 		return base;
 	},
 
-	get isUnlocked() { return player.monomensions.antimatter.unlocks >= 4; },
+	get isUnlocked() { return player.monomensions.antimatter.unlocks >= 4 && !Absolve.hasFinished; },
 
 	get baseMultiplier() {
 		if (TimeUpgrades.surgeIdle.canApply) return 7.5;

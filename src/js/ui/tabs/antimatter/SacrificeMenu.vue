@@ -2,6 +2,8 @@
 import { AMHandler } from "@/js/antimatter";
 import { SacrificeHandler } from "@/js/antimatter/sacrifice";
 
+import { Absolve } from "@/js/absolve";
+
 import { Modals } from "@/js/ui/modals";
 
 import { player } from "@/js/player";
@@ -11,7 +13,7 @@ import { format, formatOrder, formatX } from "@/utils";
 
 <template>
 	<div
-		v-if="player.monomensions.antimatter.unlocks >= 3"
+		v-if="player.monomensions.antimatter.unlocks >= 3 && !Absolve.hasFinished"
 		class="c-sacrifice-menu"
 	>
 		You have {{ format(player.monomensions.antimatter.sacrifice) }} Sacrifice Points, boosting the

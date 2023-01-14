@@ -1,10 +1,12 @@
 import { Strikes } from "@/js/strikes";
 
+import { TachyonEngine } from "@/js/time/engines";
+import { TimeUpgrades } from "@/js/time";
+
 import { GlyphGenerator } from "./generator";
 import { GlyphUnlocks } from "./unlocks";
 
-import { TachyonEngine } from "@/js/time/engines";
-import { TimeUpgrades } from "@/js/time";
+import { Absolve } from "@/js/absolve";
 
 import { player } from "@/js/player";
 
@@ -15,7 +17,7 @@ export * from "./unlocks";
 
 export const GlyphHandler = {
 	get isUnlocked() {
-		return Strikes[2].isUnlocked;
+		return Strikes[2].isUnlocked && !Absolve.hasRemoved("Glyphs");
 	},
 
 	get powerPerTick() {

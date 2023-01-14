@@ -6,16 +6,19 @@ import { TickspeedUpgrade } from "./tickspeed";
 
 import { TimeDilationHandler, TimeReversal, TimeUpgrades } from "@/js/time";
 
+import { Absolve } from "@/js/absolve";
+
 import { player } from "@/js/player";
 
 export const AMHandler = {
 	get postInfCap() {
 		return Strikes[3].isUnlocked && player.infinity.ip < 1 ? 0.1 : Infinity;
 	},
-	get cap() {
-		return 1;
+	get cap(): number {
+		return Absolve.hasFinished ? 2 : 1;
 	},
 	get timeSpeedupFactor() {
+		if (Absolve.hasFinished) return 1;
 		let base = 1;
 		base *= TickspeedUpgrade.effect;
 		base /= TimeDilationHandler.dilationFactor;

@@ -8,6 +8,8 @@ import { TimeRebuyables } from "@/js/time";
 
 import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
+import { Absolve } from "@/js/absolve";
+
 import { player } from "@/js/player";
 
 export const TickspeedUpgrade = new (class extends AntimatterRebuyableState<undefined> {
@@ -15,7 +17,7 @@ export const TickspeedUpgrade = new (class extends AntimatterRebuyableState<unde
 	set amount(v: number) { player.monomensions.antimatter.tickspeed = v; }
 
 	get isUnlocked() {
-		return player.monomensions.antimatter.unlocks >= 2;
+		return player.monomensions.antimatter.unlocks >= 2 && !Absolve.hasFinished;
 	}
 
 	get freeAmount() {

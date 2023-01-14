@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { Modals } from "@/js/ui/modals";
 import { Tabs } from "@/js/ui/tabs";
+
+import { Absolve } from "@/js/absolve";
+
+import { player } from "@/js/player";
 </script>
 
 <template>
@@ -21,8 +25,12 @@ import { Tabs } from "@/js/ui/tabs";
 			:class="{
 				'c-sidebar__tab-button': true,
 				'c-sidebar__tab-button--enabled': tab.isUnlocked,
-				'c-sidebar__tab-button--current': tab.isCurrent
+				'c-sidebar__tab-button--current': tab.isCurrent ||
+					(player.absolve === tab.config.tieAbsolve && Absolve.isAbsolving)
 			}"
+			:style="player.absolve === tab.config.tieAbsolve && Absolve.isAbsolving ? {
+				filter: `brightness(${1 + Absolve.progress * 10})`
+			} : {}"
 			@click="tab.setCurrent()"
 		>
 			<span v-if="tab.isUnlocked">{{ tab.name }}</span>

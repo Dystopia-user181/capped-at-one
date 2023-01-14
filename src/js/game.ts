@@ -9,6 +9,8 @@ import { GlyphHandler } from "./glyphs";
 
 import { InfHandler } from "./infinity";
 
+import { Absolve } from "./absolve";
+
 let lastTick = Date.now();
 
 export function gameLoop(_diff?: number) {
@@ -23,6 +25,7 @@ export function gameLoop(_diff?: number) {
 	AMHandler.tick(diff);
 	GlyphHandler.tick(diff);
 	InfHandler.tick(diff);
+	Absolve.tick(diff);
 	GameUI.update();
 	LogicEvent.dispatch("GAME_TICK_AFTER");
 }

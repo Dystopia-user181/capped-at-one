@@ -3,13 +3,15 @@ import { InfUpgrades } from "./upgrades";
 
 import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
+import { Absolve } from "@/js/absolve";
+
 import { player } from "@/js/player";
 
 export * from "./monomensions";
 export * from "./upgrades";
 
 export const InfHandler = {
-	get isUnlocked() { return player.infinity.bestIP > 0; },
+	get isUnlocked() { return player.infinity.bestIP > 0 && !Absolve.hasRemoved("Infinity"); },
 
 	get progressToNext() { return player.infinity.ipProgress; },
 	set progressToNext(v) { player.infinity.ipProgress = v; },
@@ -22,7 +24,7 @@ export const InfHandler = {
 	},
 
 	get infPowPower() {
-		return 0.3;
+		return this.isUnlocked ? 0.3 : 0;
 	},
 	get infPowEffect() {
 		return Math.pow(player.infinity.infPow + 1, this.infPowPower);

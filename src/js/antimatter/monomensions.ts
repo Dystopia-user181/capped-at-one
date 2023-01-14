@@ -8,6 +8,8 @@ import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
 import { InfHandler } from "@/js/infinity";
 
+import { Absolve } from "@/js/absolve";
+
 import { player } from "@/js/player";
 
 
@@ -25,14 +27,17 @@ export class AntimatterMonomensionState extends AntimatterRebuyableState<OneToEi
 	set bought(v: number) { player.monomensions.antimatter[this.id].bought = v; }
 
 	get isUnlocked() {
+		if (Absolve.hasRemoved("the 2nd to 8th Anti Monomensions")) return this.id === 1;
 		return player.monomensions.antimatter.unlocks >= this.id;
 	}
 
 	get isCurrent() {
+		if (Absolve.hasFinished) return this.id === 1;
 		return player.monomensions.antimatter.unlocks === this.id;
 	}
 
 	get multiplier() {
+		if (Absolve.hasFinished) return 0.1;
 		let base = 1;
 		base /= AMHandler.slowdownFactor;
 		if (this.isCurrent) base *= SacrificeHandler.effect;
