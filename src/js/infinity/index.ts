@@ -15,7 +15,7 @@ export const InfHandler = {
 		return 0.5;
 	},
 	get infPowEffect() {
-		return Math.pow(player.infinity.infPow, this.infPowPower);
+		return Math.pow(player.infinity.infPow + 1, this.infPowPower);
 	},
 
 	tick(diff: number) {

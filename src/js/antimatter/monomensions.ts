@@ -6,6 +6,8 @@ import { SurgeHandler } from "./surge";
 
 import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
+import { InfHandler } from "@/js/infinity";
+
 import { player } from "@/js/player";
 
 
@@ -36,6 +38,7 @@ export class AntimatterMonomensionState extends AntimatterRebuyableState<OneToEi
 		if (this.isCurrent) base *= SacrificeHandler.effect;
 		if (SurgeHandler.selectedMono === this.id) base *= SurgeHandler.effect;
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.amMult, 1);
+		base *= InfHandler.infPowEffect;
 		if (base < 1) base = Math.pow(base, 1 / GlyphEffectHandler.effectOrDefault(GlyphEffect.amPow, 1));
 		else base = Math.pow(base, GlyphEffectHandler.effectOrDefault(GlyphEffect.amPow, 1));
 		return base;
