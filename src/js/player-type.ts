@@ -29,8 +29,8 @@ export interface PlayerType {
 		tachyonMatter: number,
 		upgrades: number,
 		chosenUpgrade: number,
-		rebuyables: [number, number, number, number, number],
-		rebuyablesEnabled: [boolean, boolean, boolean, boolean, boolean],
+		rebuyables: [number, number, number, number, number, number],
+		rebuyablesEnabled: [boolean, boolean, boolean, boolean, boolean, boolean],
 		tachyonEngine: {
 			on: boolean,
 			level: number,
@@ -39,6 +39,7 @@ export interface PlayerType {
 	},
 	auto: {
 		surge: boolean,
+		discard: boolean,
 	},
 	glyphs: {
 		glyphPower: number,
@@ -53,6 +54,7 @@ export interface PlayerType {
 		bestIP: number,
 		ip: number,
 		infPow: number,
+		upgrades: 0,
 	},
 	options: {
 		autosave: number,

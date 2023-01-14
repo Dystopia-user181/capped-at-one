@@ -4,6 +4,8 @@ import { TimeDilationHandler } from "./dilation";
 
 import { GlyphEffect, GlyphEffectHandler, GlyphHandler } from "@/js/glyphs";
 
+import { InfHandler } from "@/js/infinity";
+
 import { player } from "@/js/player";
 
 import { BitUpgradeState, format, formatInt, formatX, RebuyableState, run } from "@/utils";
@@ -147,11 +149,20 @@ export const TimeUpgrades = {
 	glyphPowDynamic: new TimeUpgrade({
 		id: 7,
 		cost: 1e4,
-		effect: () => Math.log10(player.time.tachyonMatter + 10) / 2.4,
+		effect: () => Math.max(Math.log10(player.time.tachyonMatter + 10) / 2.4,
+			Math.log10(player.time.tachyonMatter + 10) ** 2 / 15),
 		isUnlocked: () => GlyphHandler.isUnlocked,
 
 		description: (upg: TimeUpgrade) => `${formatX(upg.effect)} glyph power gain based on Tachyon Matter`
 	}),
+	momentumGain: new TimeUpgrade({
+		id: 8,
+		cost: 1e13,
+		effect: () => Math.pow(Math.log10(player.infinity.infPow + 1), 2) / 10 + 1,
+		isUnlocked: () => InfHandler.isUnlocked,
+
+		description: (upg: TimeUpgrade) => `${formatX(upg.effect)} momentum gain speed based on Infinity Power`
+	})
 };
 
 export const TimeRebuyables = (function() {
@@ -213,12 +224,24 @@ export const TimeRebuyables = (function() {
 			cap: 20,
 			isUnlocked() { return Strikes[3].isUnlocked; },
 
-
 			description(upg) {
 				return upg.amount <= 0 ? "Unlock the Tachyon Engine"
 					: `Increase maximum Tachyon Engine activity level
 					<br>
 					Currently: ${formatInt(upg.effect)}`;
+			}
+		}),
+		tachyonEnginePow: new TimeRebuyable({
+			id: 5,
+			cost: x => Math.pow(4, x) * 1e13,
+			effect: x => 0.2 * x,
+			cap: 20,
+			isUnlocked() { return Strikes[3].isUnlocked; },
+
+			description(upg) {
+				return `Increase the effect of Tachyon Engine levels on Momentum
+				<br>
+				Currently: ^(+${format(upg.effect)})`;
 			}
 		}),
 	};

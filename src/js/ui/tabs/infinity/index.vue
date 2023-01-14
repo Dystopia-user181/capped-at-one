@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import InfinityMonomensionRow from "./InfinityMonomensionRow.vue";
+import InfUpgrade from "./InfUpgrade.vue";
 import TachyonEngines from "../time/TachyonEngines.vue";
 
 import { TimeDilationHandler } from "@/js/time";
 
-import { InfHandler, InfinityMonomension } from "@/js/infinity";
+import { InfHandler, InfinityMonomension, InfUpgrades } from "@/js/infinity";
 
 import { player } from "@/js/player";
 
@@ -23,6 +24,14 @@ import { format, formatX } from "@/utils";
 		Infinity Points
 	</div>
 	<TachyonEngines />
+	<br>
+	<div class="c-inf-upgrades-container">
+		<InfUpgrade
+			v-for="(_, i) in InfUpgrades"
+			:key="'inf-upgrade-' + i"
+			:upg-name="i"
+		/>
+	</div>
 	<br>
 	<div>
 		You have
@@ -45,5 +54,13 @@ import { format, formatX } from "@/utils";
 .c-game-header__infinity-points {
 	font-size: 25px;
 	color: var(--colour-infinity);
+}
+
+.c-inf-upgrades-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	max-width: 920px;
+	margin: auto;
 }
 </style>

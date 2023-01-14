@@ -55,7 +55,7 @@ const tryAscendConfirm = (function() {
 	Weight of unlocks: {{ formatX(1 / AMHandler.slowdownFactor) }} to Monomension multipliers
 	<template v-if="player.antimatter >= AMHandler.postInfCap">
 		<br>
-		Reach 0.3 IP to progress to 1.00 Antimatter
+		Reach 1.00 IP to progress to 1.00 Antimatter
 	</template>
 	<DilationPanel />
 	<template v-if="Strikes[3].isUnlocked">

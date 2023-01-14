@@ -3,6 +3,7 @@ import { Strikes } from "@/js/strikes";
 import { GlyphGenerator } from "./generator";
 import { GlyphUnlocks } from "./unlocks";
 
+import { TachyonEngine } from "@/js/time/engines";
 import { TimeUpgrades } from "@/js/time";
 
 import { player } from "@/js/player";
@@ -21,6 +22,7 @@ export const GlyphHandler = {
 		let base = 0.02;
 		base *= TimeUpgrades.glyphPowStatic.effectOrDefault(1);
 		base *= TimeUpgrades.glyphPowDynamic.effectOrDefault(1);
+		base *= TachyonEngine.glyphPowBoost;
 		return base;
 	},
 	tick(diff: number) {
@@ -28,5 +30,6 @@ export const GlyphHandler = {
 		player.glyphs.glyphPower += this.powerPerTick * diff;
 		if (!GlyphUnlocks.noCap.effect) player.glyphs.glyphPower = Math.min(player.glyphs.glyphPower, 1);
 		if (player.glyphs.glyphPower >= 1) GlyphGenerator.makeNewGlyph();
+		if (player.auto.discard) GlyphGenerator.discardNewGlyph();
 	},
 };

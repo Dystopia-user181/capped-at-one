@@ -1,8 +1,8 @@
-import { TimeRebuyables } from "@/js/time";
+import { TimeRebuyables, TimeUpgrades } from ".";
 
 import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
-import { InfHandler } from "@/js/infinity";
+import { InfHandler, InfUpgrades } from "@/js/infinity";
 
 import { player } from "@/js/player";
 
@@ -19,19 +19,28 @@ export const TachyonEngine = {
 			: Math.pow(10, this.level + (this.level >= 1 ? 1 : -1)) * this.level;
 	},
 	get production() {
-		let base = Math.pow(this.level, 2.5) / 10;
+		let base = Math.pow(this.level, 2.5 + TimeRebuyables.tachyonEnginePow.effect) / 10;
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.momentumGain, 1);
+		base *= TimeUpgrades.momentumGain.effectOrDefault(1);
 		return base;
 	},
 	get lossFactor() {
 		let base = 0.1;
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.momentumDecay, 1);
+		base *= TimeUpgrades.momentumGain.effectOrDefault(1);
 		return base;
+	},
+	get glyphPowBoostAt() {
+		return 5.55e5;
+	},
+	get glyphPowBoost() {
+		return this.momentum < this.glyphPowBoostAt ? 1
+			: Math.pow(this.momentum / 1e3, 0.2);
 	},
 
 	get momentum() { return player.time.tachyonEngine.momentum; },
 	set momentum(v) { player.time.tachyonEngine.momentum = v; },
-	get momentumToProgress() { return 0.02; },
+	get momentumToProgress() { return 0.02 * InfUpgrades.infPowBoostMomentum.effectOrDefault(1); },
 	tick(diff: number) {
 		if (player.time.tachyonMatter < 0) {
 			player.time.tachyonMatter = 0;
@@ -39,7 +48,7 @@ export const TachyonEngine = {
 		}
 		const p = this.production;
 		const a = this.lossFactor;
-		if (!this.isOn) {
+		if (!this.isOn || p <= 0) {
 			InfHandler.progressToNext += (this.momentum / a) * (1 - Math.exp(-a * diff)) * this.momentumToProgress;
 			this.momentum /= Math.exp(a * diff);
 			if (this.momentum < 1e-3) this.momentum = 0;

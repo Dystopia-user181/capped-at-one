@@ -4,7 +4,7 @@ import { TimeRebuyables } from "@/js/time";
 
 import { InfHandler } from "@/js/infinity";
 
-import { format, formatPercents } from "@/utils";
+import { format, formatPercents, formatX } from "@/utils";
 </script>
 
 <template>
@@ -39,6 +39,12 @@ import { format, formatPercents } from "@/utils";
 		(+{{ format(TachyonEngine.isOn ? TachyonEngine.production : 0) }}/s,
 		-{{ formatPercents(TachyonEngine.lossFactor) }} of total/s)
 		<br>
+		<template v-if="TachyonEngine.momentum < TachyonEngine.glyphPowBoostAt">
+			New effect at {{ format(TachyonEngine.glyphPowBoostAt) }} momentum
+		</template>
+		<template v-else>
+			{{ formatX(TachyonEngine.glyphPowBoost) }} to Glyph Power Gain
+		</template>
 		<br>
 		<button
 			class="c-button-good"

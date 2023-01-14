@@ -58,6 +58,13 @@ import { formatInt, formatPercents } from "@/utils";
 						: ""
 				}}.
 			</span>
+			<br>
+			<span v-if="GlyphUnlocks.autoSac.effect">
+				Auto-discard: <input
+					v-model="player.auto.discard"
+					type="checkbox"
+				>
+			</span>
 		</div>
 	</div>
 </template>

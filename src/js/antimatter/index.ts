@@ -10,7 +10,7 @@ import { player } from "@/js/player";
 
 export const AMHandler = {
 	get postInfCap() {
-		return Strikes[3].isUnlocked && player.infinity.ip < 0.3 ? 0.1 : Infinity;
+		return Strikes[3].isUnlocked && player.infinity.ip < 1 ? 0.1 : Infinity;
 	},
 	get cap() {
 		return 1;
@@ -51,6 +51,7 @@ export const AMHandler = {
 					AntimatterMonomension(j).amount += production;
 					production *= AntimatterMonomension(j).multiplier * this.timeSpeedupFactor * antidimDiff /
 					(i - j + 1);
+					if (antidimDiff < 0 && AntimatterMonomension(j).amount <= 0) production = 0;
 				}
 				player.antimatter = Math.min(Math.min(player.antimatter + production, this.cap), this.postInfCap);
 			}

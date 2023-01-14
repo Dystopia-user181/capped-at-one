@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { GlyphSacrificeHandler, GlyphTypes } from "@/js/glyphs";
+import { GlyphSacrificeHandler, GlyphTypes, GlyphUnlocks } from "@/js/glyphs";
 
 import { player } from "@/js/player";
 
@@ -11,13 +11,14 @@ import { format, formatPercents } from "@/utils";
 		v-if="GlyphSacrificeHandler.isUnlocked"
 		class="c-glyph-sacrifice-container"
 	>
-		<h2>
+		<h3>
 			Glyph Sacrifice
-		</h2>
+		</h3>
 		<template v-for="(glyphType, glyphName) in GlyphTypes">
 			<div
 				v-if="glyphType.isUnlocked"
 				:key="'glyph-sac-' + glyphType"
+				class="c-glyph-sacrifice__subsection"
 			>
 				<span
 					class="c-glyph-sacrifice__header"
@@ -36,10 +37,12 @@ import { format, formatPercents } from "@/utils";
 				</span>
 				<br>
 				<span class="c-glyph-sacrifice__effect">
-					+{{ formatPercents(GlyphSacrificeHandler.rarityBoost(glyphName)) }} rarity range to
-					{{ glyphType.name }} Glyphs
+					+{{ formatPercents(GlyphSacrificeHandler.rarityBoost(glyphName)) }} rarity range
+					<template v-if="GlyphUnlocks.glyphSacEffect.effect">
+						and +{{ formatPercents(GlyphSacrificeHandler.levelBoost(glyphName) - 1) }} effective level
+					</template>
+					to {{ glyphType.name }} Glyphs
 				</span>
-				<br>
 				<br>
 			</div>
 		</template>
@@ -58,6 +61,10 @@ import { format, formatPercents } from "@/utils";
 	border-radius: 10px;
 	padding: 0 10px;
 	margin-left: 5px;
+}
+
+.c-glyph-sacrifice__subsection {
+	margin-bottom: 7px;
 }
 
 .c-glyph-sacrifice__header {

@@ -1,3 +1,5 @@
+import { Strikes } from "@/js/strikes";
+
 import { AntimatterMonomension } from "@/js/antimatter/monomensions";
 
 import { TimeDilationHandler, TimeRebuyables, TimeUpgrades } from ".";
@@ -28,12 +30,12 @@ export const TimeReversal = {
 	},
 	tick(diff: number) {
 		if (player.antimatter <= 0) {
-			this.isActive = false;
+			if (!Strikes[3].isUnlocked) this.isActive = false;
 			player.antimatter = 0;
 		}
 		for (let i = 1; i <= player.monomensions.antimatter.unlocks; i++) {
 			if (AntimatterMonomension(i).amount <= 0) {
-				this.isActive = false;
+				if (!Strikes[3].isUnlocked) this.isActive = false;
 				AntimatterMonomension(i).amount = 0;
 			}
 		}

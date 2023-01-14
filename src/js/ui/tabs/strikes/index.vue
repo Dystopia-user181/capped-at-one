@@ -51,6 +51,8 @@ const unlocks = $computed(() => player.monomensions.antimatter.maxUnlocks);
 		<br>
 		Unlock Infinity and the Tachyon Engine
 		<br>
+		Time Reversal continues if a Monomension reaches 0
+		<br>
 		<br>
 	</template>
 </template>

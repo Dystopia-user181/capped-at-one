@@ -5,7 +5,7 @@ import { player } from "@/js/player";
 import { RebuyableState } from "@/utils";
 
 
-const baseCosts = [0.02, 0.06, 0.1, 0.14, 0.2, 0.3, 0.5, 0.7] as const;
+const baseCosts = [0.02, 0.06, 0.1, 0.14, 0.2, 0.3, 0.45, 0.6] as const;
 const scaling = [0.02, 0.04, 0.05, 0.07, 0.1, 0.15, 0.2, 0.3] as const;
 
 
@@ -40,7 +40,7 @@ export class InfinityMonomensionState extends RebuyableState<OneToEight> {
 	get production() { return this.effect; }
 
 	get cost() {
-		return baseCosts[this.id - 1] + scaling[this.id - 1] * this.bought;
+		return Math.round((baseCosts[this.id - 1] + scaling[this.id - 1] * this.bought) * 100) / 100;
 	}
 
 	handlePurchase() {

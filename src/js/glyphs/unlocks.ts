@@ -57,7 +57,7 @@ export const GlyphUnlocks = {
 		isUnlocked: () => InfHandler.isUnlocked,
 
 		description: "Unlock Infinity Glyphs",
-		currencyDisplay: "IP",
+		currencyDisplay: "Infinity Points",
 	}),
 	noCap: new GlyphUnlockState({
 		id: 3,
@@ -68,7 +68,37 @@ export const GlyphUnlocks = {
 
 		description: "Glyph Power is uncapped",
 		currencyDisplay: "Infinity Power",
-	})
+	}),
+	threeEffects: new GlyphUnlockState({
+		id: 4,
+		get currency() { return player.infinity.ip; },
+		set currency(v) { player.infinity.ip = v; },
+		cost: 0.16,
+		isUnlocked: () => InfHandler.isUnlocked,
+
+		description: "Glyphs can have up to 3 effects",
+		currencyDisplay: "Infinity Points",
+	}),
+	glyphSacEffect: new GlyphUnlockState({
+		id: 5,
+		get currency() { return player.infinity.ip; },
+		set currency(v) { player.infinity.ip = v; },
+		cost: 0.32,
+		isUnlocked: () => InfHandler.isUnlocked,
+
+		description: "Glyph sacrifice has a new effect",
+		currencyDisplay: "Infinity Points",
+	}),
+	autoSac: new GlyphUnlockState({
+		id: 6,
+		get currency() { return player.infinity.ip; },
+		set currency(v) { player.infinity.ip = v; },
+		cost: 0.35,
+		isUnlocked: () => InfHandler.isUnlocked,
+
+		description: "Unlock auto-discarding of Glyphs",
+		currencyDisplay: "Infinity Points",
+	}),
 };
 
 export const GlyphUnlockHandler = {

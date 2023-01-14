@@ -16,10 +16,10 @@ export const GlyphGenerator = {
 		return player.glyphs.glyphPower >= 1;
 	},
 	get newLevel() {
-		return Math.floor(Math.pow(player.glyphs.glyphPower, 1 / 3));
+		return Math.floor(Math.pow(player.glyphs.glyphPower, 1 / 2.8));
 	},
 	get nextAt() {
-		return Math.pow(this.newLevel + 1, 3);
+		return Math.pow(this.newLevel + 1, 2.8);
 	},
 	newRarity(type: GlyphType) {
 		const rng = Math.random();
@@ -31,7 +31,9 @@ export const GlyphGenerator = {
 	randomEffects(type: GlyphType) {
 		const rng = Math.random();
 		// eslint-disable-next-line no-nested-ternary
-		const effectsNumber = Math.min(rng < 0.3 ? 1 : 2, GlyphEffects[type].length);
+		const rareEffectNumber = GlyphUnlocks.threeEffects.effect ? 3 : 1;
+		const rareEffectChance = GlyphUnlocks.threeEffects.effect ? 0.2 : 0.3;
+		const effectsNumber = Math.min(rng < rareEffectChance ? rareEffectNumber : 2, GlyphEffects[type].length);
 		const effectsArray = Array.from(Array(GlyphEffects[type].length), (_, i) => 1 << i);
 		let effects = 0;
 		for (let i = 0; i < effectsNumber; i++) {
@@ -60,6 +62,7 @@ export const GlyphGenerator = {
 		player.glyphs.glyphPower = 0;
 	},
 	discardNewGlyph() {
+		if (!player.glyphs.projected) return;
 		GlyphSacrificeHandler.doSac();
 		player.glyphs.projected = null;
 		player.glyphs.glyphPower /= 4;
@@ -88,5 +91,10 @@ export const GlyphSacrificeHandler = {
 	rarityBoost(type: GlyphType) {
 		const x = player.glyphs.sacrifice[type];
 		return (1 - Math.exp(1 - Math.log(x ** 0.9 / 100 + Math.E) ** 3)) * 0.55;
+	},
+	levelBoost(type: GlyphType) {
+		if (!GlyphUnlocks.glyphSacEffect.effect) return 1;
+		const x = player.glyphs.sacrifice[type];
+		return 1 + Math.log10(x + 1) / 15;
 	},
 };

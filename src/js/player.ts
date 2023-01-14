@@ -53,8 +53,8 @@ export const Player = {
 				tachyonMatter: 0,
 				upgrades: 0,
 				chosenUpgrade: 0,
-				rebuyables: [0, 0, 0, 0, 0],
-				rebuyablesEnabled: [true, true, true, true, true],
+				rebuyables: [0, 0, 0, 0, 0, 0],
+				rebuyablesEnabled: [true, true, true, true, true, true],
 				tachyonEngine: {
 					on: false,
 					level: 0,
@@ -63,6 +63,7 @@ export const Player = {
 			},
 			auto: {
 				surge: false,
+				discard: false,
 			},
 			glyphs: {
 				glyphPower: 0,
@@ -81,6 +82,7 @@ export const Player = {
 				bestIP: 0,
 				ip: 0,
 				infPow: 0,
+				upgrades: 0,
 			},
 			options: {
 				autosave: 1,

@@ -1,4 +1,4 @@
-import { GlyphHandler, GlyphType } from ".";
+import { GlyphHandler, GlyphSacrificeHandler, GlyphType } from ".";
 
 import { player } from "@/js/player";
 
@@ -90,7 +90,7 @@ export const GlyphEffects: Record<GlyphType, {
 export const GlyphEffectHandler = {
 	effectiveLevel(glyph = player.glyphs.current) {
 		if (!glyph) return 0;
-		return glyph.level * (glyph.rarity + 0.5);
+		return glyph.level * (glyph.rarity + 0.5) * GlyphSacrificeHandler.levelBoost(glyph.type);
 	},
 	getEffects(glyph = player.glyphs.current): Partial<Record<GlyphEffect, number>> {
 		if (!glyph || !GlyphHandler.isUnlocked) return {};

@@ -1,10 +1,12 @@
 import { InfinityMonomension } from "./monomensions";
+import { InfUpgrades } from "./upgrades";
 
 import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
 import { player } from "@/js/player";
 
 export * from "./monomensions";
+export * from "./upgrades";
 
 export const InfHandler = {
 	get isUnlocked() { return player.infinity.bestIP > 0; },
@@ -14,7 +16,9 @@ export const InfHandler = {
 	get progressRequired() {
 		let base = 2;
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.ipReqDiv, 1);
-		return Math.pow(base, player.infinity.ip * 100);
+		let gainFactor = 1;
+		gainFactor *= InfUpgrades.ipGain.effectOrDefault(1);
+		return Math.pow(base, player.infinity.ip * 100 / gainFactor);
 	},
 
 	get infPowPower() {
