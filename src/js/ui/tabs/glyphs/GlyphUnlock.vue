@@ -12,6 +12,7 @@ const upgrade = GlyphUnlocks[upgName];
 
 <template>
 	<button
+		v-if="upgrade.isUnlocked"
 		class="c-glyph-unlock"
 		:class="{
 			'c-button-good': !upgrade.isBought,

@@ -30,10 +30,7 @@ const displayedMono = InfinityMonomension(dimId);
 		<span class="c-monomensions-row__amount">
 			{{ format(displayedMono.amount) }} ({{ format(displayedMono.bought, 2, 0) }})
 		</span>
-		<div
-			v-if="displayedMono.isCurrent"
-			class="c-monomensions-row__buy"
-		>
+		<div class="c-monomensions-row__buy">
 			<button
 				class="c-monomensions-row__buy-button c-button-good"
 				:disabled="!displayedMono.canAfford"

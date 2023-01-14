@@ -17,7 +17,7 @@ export const SacrificeHandler = {
 	get sacAmount() {
 		if (!this.canSac) return 0;
 		let amount = (player.antimatter - AMHandler.baseAM) * (AntimatterMonomension("current").amount ** 2);
-		amount *= Math.pow(100, player.monomensions.antimatter.unlocks) * 0.1;
+		amount *= Math.pow(Strikes[3].isUnlocked ? 30 : 100, player.monomensions.antimatter.unlocks) * 0.1;
 		amount *= TimeRebuyables.sacPointGain.effectOrDefault(1);
 		amount = Math.pow(amount, TimeUpgrades.sacBefore1.effectOrDefault({ power: 1, multiplier: 1 }).power);
 		amount *= TimeUpgrades.sacBefore1.effectOrDefault({ power: 1, multiplier: 1 }).multiplier;

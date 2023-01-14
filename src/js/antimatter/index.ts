@@ -61,6 +61,12 @@ export const AMHandler = {
 		return Math.pow(Strikes[2].isUnlocked ? 30 : 10, player.monomensions.antimatter.unlocks);
 	},
 
+	resetRun() {
+		player.antimatter = this.baseAM;
+		for (let i = 1; i <= 8; i++) AntimatterMonomension(i).reset();
+		player.monomensions.antimatter.timeElapsed = 0;
+		SurgeHandler.boostAmount = 0;
+	},
 	_resetResources() {
 		player.antimatter = this.baseAM;
 		player.monomensions.antimatter.tickspeed = 0;

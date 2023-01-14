@@ -15,47 +15,76 @@ export enum GlyphEffect {
 	tachMult,
 	timeBuyableCost,
 	tachMultBySac,
+
+	// Infinity
+	ipReqDiv,
+	imMult,
+	momentumGain,
+	momentumDecay,
 }
 
-export const GlyphEffects = {
+export const GlyphEffects: Record<GlyphType, {
+	id: GlyphEffect,
+	description: (x: number) => string,
+	effect: (x: number) => number,
+}[]> = {
 	[GlyphType.power]: [{
 		id: GlyphEffect.amMult,
-		description: (x: number) => `Multiply all Anti Monomensions by ${format(x)}`,
-		effect: (x: number) => Math.pow(3 + x, 2),
+		description: (x: number) => `All Anti Monomension multipliers ${format(x)}`,
+		effect: (x: number) => Math.pow(3 + x * 1.5, 2),
 	},
 	{
 		id: GlyphEffect.tickMult,
-		description: (x: number) => `Increase effectiveness of tickspeed by ${formatPercents(x)}`,
+		description: (x: number) => `Tickspeed effectiveness +${formatPercents(x)}`,
 		effect: (x: number) => Math.log10(x + 1) / 5 + 0.03,
 	},
 	{
 		id: GlyphEffect.amPow,
-		description: (x: number) => `Raise all Mono multipliers to ^${format(1 / x)} if < 1
-		and ^${format(x)} if > 1`,
+		description: (x: number) => `All Anti Mono multipliers ^${format(1 / x)} if < 1, ^${format(x)} if > 1`,
 		effect: (x: number) => 1.02 * Math.pow(x + 1, 0.2),
 	},
 	{
 		id: GlyphEffect.dilNerf,
-		description: (x: number) => `Dilation effect is moved ${format(x)} orders of magnitude later`,
+		description: (x: number) => `Dilation effect starts ${format(x)} OoM later`,
 		effect: (x: number) => 8 + 4 * x,
 	}],
 
 	[GlyphType.time]: [{
 		id: GlyphEffect.tachMult,
-		description: (x: number) => `Multiply Tachyon Matter gain by ${format(x)}`,
+		description: (x: number) => `Tachyon Matter gain ${formatX(x)}`,
 		effect: (x: number) => x + 3,
 	},
 	{
 		id: GlyphEffect.timeBuyableCost,
-		description: (x: number) => `Divide repeatable Time upgrade costs by ${format(x)}`,
+		description: (x: number) => `Repeatable Time upgrade costs /${format(x)}`,
 		effect: (x: number) => (x * x) / 5 + x * 1.3 + 4,
 	},
 	{
 		id: GlyphEffect.tachMultBySac,
-		description: (x: number) => `Multiply Tachyon Matter gain by ln(sac pts + 1)${formatX(x)}`,
+		description: (x: number) => `Tachyon Matter gain by ×ln(sac pts + 1)${formatX(x)}`,
 		effect: (x: number) => (x + Math.sqrt(x * 0.7) + 1)
 	}],
-	[GlyphType.infinity]: [],
+
+	[GlyphType.infinity]: [{
+		id: GlyphEffect.ipReqDiv,
+		description: (x: number) => `IP req ${formatX(2, 0, 0)} --> ${formatX(x * 2)} per level`,
+		effect: (x: number) => (0.35 / Math.sqrt(x * x / 5000 + x / 20 + 1) + 0.55)
+	},
+	{
+		id: GlyphEffect.imMult,
+		description: (x: number) => `All Inf Monomension multipliers ${formatX(x)}`,
+		effect: (x: number) => Math.pow(3.4 + x * 2, 2),
+	},
+	{
+		id: GlyphEffect.momentumGain,
+		description: (x: number) => `Momentum gain ${formatX(x)}`,
+		effect: (x: number) => Math.pow(2 + x * 1.2, 2) + 1,
+	},
+	{
+		id: GlyphEffect.momentumDecay,
+		description: (x: number) => `Momentum decay ${formatX(x)}`,
+		effect: (x: number) => 1 / (Math.pow(3 + x * 1.2, 2.2) + 1),
+	}],
 };
 
 export const GlyphEffectHandler = {

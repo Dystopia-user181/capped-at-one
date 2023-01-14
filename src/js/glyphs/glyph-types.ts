@@ -6,7 +6,12 @@ export enum GlyphType {
 	infinity,
 }
 
-export const GlyphTypes = {
+export const GlyphTypes: Record<GlyphType, {
+	name: string,
+	colour: string,
+	symbol: string,
+	isUnlocked: boolean,
+}> = {
 	[GlyphType.power]: {
 		name: "Power",
 		colour: "#22aa48",
@@ -23,6 +28,6 @@ export const GlyphTypes = {
 		name: "Infinity",
 		colour: "#b67f33",
 		symbol: "I",
-		isUnlocked: false,
+		get isUnlocked() { return GlyphUnlockHandler.isInfGlyphUnlocked; },
 	}
 };

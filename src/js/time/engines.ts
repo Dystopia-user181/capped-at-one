@@ -1,5 +1,7 @@
 import { TimeRebuyables } from "@/js/time";
 
+import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
+
 import { InfHandler } from "@/js/infinity";
 
 import { player } from "@/js/player";
@@ -16,10 +18,14 @@ export const TachyonEngine = {
 		return (this.level <= 0 || !this.isOn) ? 0 : Math.pow(10, this.level - 1) * 0.5;
 	},
 	get production() {
-		return (this.level * this.level) / 25;
+		let base = (this.level * this.level) / 25;
+		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.momentumGain, 1);
+		return base;
 	},
 	get lossFactor() {
-		return 0.04;
+		let base = 0.04;
+		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.momentumDecay, 1);
+		return base;
 	},
 
 	get momentum() { return player.time.tachyonEngine.momentum; },

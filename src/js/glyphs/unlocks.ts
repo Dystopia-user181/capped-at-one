@@ -1,11 +1,14 @@
+import { InfHandler } from "@/js/infinity";
+
 import { player } from "@/js/player";
 
-import { BitUpgradeState } from "@/utils";
+import { BitUpgradeState, run } from "@/utils";
 
 interface GlyphUnlockConfig {
 	id: number,
 	currency: number,
 	cost: number,
+	isUnlocked?: () => boolean,
 
 	description: string,
 	currencyDisplay: string,
@@ -17,6 +20,8 @@ export class GlyphUnlockState extends BitUpgradeState<GlyphUnlockConfig, boolean
 
 	get currencyAmount() { return this.config.currency; }
 	set currencyAmount(v) { this.config.currency = v; }
+
+	get isUnlocked() { return run(this.config.isUnlocked) ?? true; }
 
 	get cost() { return this.config.cost; }
 	get effect() { return this.canApply; }
@@ -44,10 +49,23 @@ export const GlyphUnlocks = {
 		description: "Unlock Glyph Sacrifice",
 		currencyDisplay: "Sacrifice Points",
 	}),
+	infGlyphs: new GlyphUnlockState({
+		id: 2,
+		get currency() { return player.infinity.ip; },
+		set currency(v) { player.infinity.ip = v; },
+		cost: 0.1,
+		isUnlocked: () => InfHandler.isUnlocked,
+
+		description: "Unlock Infinity Glyphs",
+		currencyDisplay: "IP",
+	}),
 };
 
 export const GlyphUnlockHandler = {
 	get isTimeGlyphUnlocked() {
 		return GlyphUnlocks.timeGlyphs.effect;
 	},
+	get isInfGlyphUnlocked() {
+		return GlyphUnlocks.infGlyphs.effect;
+	}
 };

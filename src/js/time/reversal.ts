@@ -37,8 +37,7 @@ export const TimeReversal = {
 				AntimatterMonomension(i).amount = 0;
 			}
 		}
-		if (!this.isActive) return;
-		player.time.tachyonMatter += this.tpPerSec * diff;
+		player.time.tachyonMatter += Math.min(this.isActive ? Infinity : 0, this.tpPerSec) * diff;
 		TachyonEngine.tick(diff);
 	}
 };

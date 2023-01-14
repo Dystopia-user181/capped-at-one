@@ -1,6 +1,8 @@
-import { RebuyableState } from "@/utils";
+import { GlyphEffect, GlyphEffectHandler } from "@/js/glyphs";
 
 import { player } from "@/js/player";
+
+import { RebuyableState } from "@/utils";
 
 
 const baseCosts = [0.02, 0.06, 0.1, 0.14, 0.2, 0.3, 0.5, 0.7] as const;
@@ -23,13 +25,10 @@ export class InfinityMonomensionState extends RebuyableState<OneToEight> {
 		return player.infinity.bestIP >= baseCosts[this.id - 1];
 	}
 
-	get isCurrent() {
-		return player.monomensions.antimatter.unlocks === this.id;
-	}
-
 	get multiplier() {
-		let base = 1;
+		let base = 0.1;
 		base *= Math.min(Math.pow(2, this.bought), Math.max(Math.pow(this.bought, 2), 1));
+		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.imMult, 1);
 		return base;
 	}
 
@@ -41,7 +40,6 @@ export class InfinityMonomensionState extends RebuyableState<OneToEight> {
 	get production() { return this.effect; }
 
 	get cost() {
-		if (this.bought >= 1 || !this.isCurrent) return Infinity;
 		return baseCosts[this.id - 1] + scaling[this.id - 1] * this.bought;
 	}
 

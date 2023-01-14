@@ -4,7 +4,7 @@ import TachyonEngines from "../time/TachyonEngines.vue";
 
 import { TimeDilationHandler } from "@/js/time";
 
-import { InfHandler } from "@/js/infinity";
+import { InfHandler, InfinityMonomension } from "@/js/infinity";
 
 import { player } from "@/js/player";
 
@@ -23,13 +23,16 @@ import { format, formatX } from "@/utils";
 		Infinity Points
 	</div>
 	<TachyonEngines />
+	<br>
 	<div>
 		You have
 		<span class="c-game-header__infinity-points">
 			{{ format(player.infinity.infPow) }}
 		</span>
+		(+{{ format(InfinityMonomension(1).effect) }}/s)
 		Infinity Power, boosting Anti Monomensions by {{ formatX(InfHandler.infPowEffect) }}
 		(x<sup>{{ format(InfHandler.infPowPower, 2, 2) }}</sup>)
+		<br>
 	</div>
 	<InfinityMonomensionRow
 		v-for="i in 8"

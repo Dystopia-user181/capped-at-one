@@ -56,6 +56,14 @@ const tryAscendConfirm = (function() {
 	<DilationPanel />
 	<template v-if="Strikes[3].isUnlocked">
 		Time elapsed: {{ format(player.monomensions.antimatter.timeElapsed) }} / {{ format(1) }}
+		<br>
+		<button
+			v-if="AMHandler.timeLeft <= 0"
+			class="c-button-good"
+			@click="AMHandler.resetRun()"
+		>
+			Reset run
+		</button>
 	</template>
 	<br>
 	<br>

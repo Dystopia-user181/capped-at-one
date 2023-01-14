@@ -36,9 +36,8 @@ import { format, formatPercents } from "@/utils";
 			}"
 		/>
 		Momentum: {{ format(TachyonEngine.momentum) }}
-		+{{ format(TachyonEngine.isOn ? TachyonEngine.production : 0) }}/s,
-		-{{ formatPercents(TachyonEngine.lossFactor) }} of total/s
-		<br>
+		(+{{ format(TachyonEngine.isOn ? TachyonEngine.production : 0) }}/s,
+		-{{ formatPercents(TachyonEngine.lossFactor) }} of total/s)
 		<br>
 		<br>
 		<button
