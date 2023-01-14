@@ -36,7 +36,7 @@ export const AMHandler = {
 	set timeElapsed(v) { player.monomensions.antimatter.timeElapsed = v; },
 	get timeLeft() { return this.capAt1s ? 1 - this.timeElapsed : Infinity; },
 	tick(_diff: number) {
-		if (player.antimatter >= this.cap && !TimeReversal.isActive) return;
+		if (player.antimatter >= Math.min(this.cap, this.postInfCap) && !TimeReversal.isActive) return;
 		const repeat = (TimeReversal.isActive || player.auto.surge) ? Math.min(Math.ceil(_diff), 100) : 1;
 		const diff = repeat === 0 ? 0 : _diff / repeat;
 		const diffCapped = repeat === 0 ? 0 : Math.min(_diff / (this.capAt1s ? 200 : 1), this.timeLeft) / repeat;

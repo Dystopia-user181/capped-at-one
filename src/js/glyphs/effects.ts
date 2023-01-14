@@ -73,7 +73,7 @@ export const GlyphEffects: Record<GlyphType, {
 	{
 		id: GlyphEffect.imMult,
 		description: (x: number) => `All Inf Monomension multipliers ${formatX(x)}`,
-		effect: (x: number) => Math.pow(3.4 + x * 2, 2),
+		effect: (x: number) => Math.pow(3.4 + x * 1.2, 2),
 	},
 	{
 		id: GlyphEffect.momentumGain,

@@ -15,15 +15,16 @@ export const TachyonEngine = {
 	get isMinLevel() { return player.time.tachyonEngine.level <= 0; },
 	get isMaxLevel() { return player.time.tachyonEngine.level >= TimeRebuyables.tachyonEngine.effect; },
 	get consumption() {
-		return (this.level <= 0 || !this.isOn) ? 0 : Math.pow(10, this.level - 1);
+		return (this.level <= 0 || !this.isOn) ? 0
+			: Math.pow(10, this.level + (this.level >= 1 ? 1 : -1)) * this.level;
 	},
 	get production() {
-		let base = (this.level * this.level) / 25;
+		let base = Math.pow(this.level, 2.5) / 10;
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.momentumGain, 1);
 		return base;
 	},
 	get lossFactor() {
-		let base = 0.04;
+		let base = 0.1;
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.momentumDecay, 1);
 		return base;
 	},
@@ -46,11 +47,14 @@ export const TachyonEngine = {
 		}
 		// m'(t) = p - am(t)
 		// m(t) = p/a(1 - e^-at)
-		const t = -Math.log(1 - this.momentum * a / p) / a;
-		this.momentum = p * (1 - Math.exp(-a * (t + diff))) / a;
+		// const t = -Math.log(1 - this.momentum * a / p) / a;
+		// this.momentum = p * (1 - Math.exp(-a * (t + diff))) / a;
+		this.momentum = p * (1 - (1 - this.momentum * a / p) * Math.exp(-a * diff)) / a;
 		// M(t) = pt/a + (p/a^2)e^-at + C
-		const M1 = p * Math.exp(-a * t) / a / a;
-		const M2 = p * diff / a + p * Math.exp(-a * (t + diff)) / a / a;
+		// const M1 = p * Math.exp(-a * t) / a / a;
+		// const M2 = p * diff / a + p * Math.exp(-a * (t + diff)) / a / a;
+		const M1 = (p / a - this.momentum) / a;
+		const M2 = p * diff / a + M1 * Math.exp(-a * diff);
 		InfHandler.progressToNext += (M2 - M1) * this.momentumToProgress;
 	},
 };

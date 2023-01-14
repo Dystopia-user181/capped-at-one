@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import GlyphComponent from "./GlyphComponent.vue";
 
-import { GlyphGenerator, GlyphSacrificeHandler } from "@/js/glyphs";
+import { GlyphGenerator, GlyphSacrificeHandler, GlyphUnlocks } from "@/js/glyphs";
 
 import { player } from "@/js/player";
 
@@ -35,13 +35,16 @@ import { formatInt, formatPercents } from "@/utils";
 				<div
 					class="c-projected-glyph-info__progress-bar-progress"
 					:style="{
-						width: `${player.glyphs.glyphPower * 100}%`
+						width: `${Math.min(player.glyphs.glyphPower, 1) * 100}%`
 					}"
 				/>
 			</div>
 			<br>
 			Projected Glyph Level:
 			{{ formatInt(GlyphGenerator.newLevel) }}
+			<template v-if="GlyphUnlocks.noCap.effect">
+				(Next at {{ formatInt(GlyphGenerator.nextAt) }} Glyph Power)
+			</template>
 			<br>
 			Projected Glyph Rarity:
 			{{ player.glyphs.projected ? formatPercents(player.glyphs.projected.rarity) : "???" }}

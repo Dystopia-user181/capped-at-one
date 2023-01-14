@@ -16,7 +16,10 @@ export const GlyphGenerator = {
 		return player.glyphs.glyphPower >= 1;
 	},
 	get newLevel() {
-		return Math.floor(Math.pow(player.glyphs.glyphPower, 0.1));
+		return Math.floor(Math.pow(player.glyphs.glyphPower, 1 / 3));
+	},
+	get nextAt() {
+		return Math.pow(this.newLevel + 1, 3);
 	},
 	newRarity(type: GlyphType) {
 		const rng = Math.random();
@@ -40,11 +43,12 @@ export const GlyphGenerator = {
 	},
 
 	makeNewGlyph(force = false) {
+		if (player.glyphs.projected) player.glyphs.projected.level = this.newLevel;
 		if (player.glyphs.projected && !force) return;
 		const type = arr(enumAsArray(GlyphType).filter(x => GlyphTypes[x].isUnlocked)).random;
 		player.glyphs.projected = {
 			type,
-			level: 1,
+			level: this.newLevel,
 			effects: this.randomEffects(type),
 			rarity: this.newRarity(type),
 		};

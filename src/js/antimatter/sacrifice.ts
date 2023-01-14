@@ -34,7 +34,7 @@ export const SacrificeHandler = {
 		for (let i = 1; i <= 8; i++) AntimatterMonomension(i).reset();
 	},
 	get sacPow() {
-		return Strikes[3].isUnlocked ? 0.25 : 0.5;
+		return Strikes[3].isUnlocked ? 0.1 : 0.5;
 	},
 	effectAtScore(x: number = player.monomensions.antimatter.sacrifice) {
 		return Math.pow(1 + x, this.sacPow);

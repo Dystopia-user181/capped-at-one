@@ -53,12 +53,22 @@ export const GlyphUnlocks = {
 		id: 2,
 		get currency() { return player.infinity.ip; },
 		set currency(v) { player.infinity.ip = v; },
-		cost: 0.1,
+		cost: 0.07,
 		isUnlocked: () => InfHandler.isUnlocked,
 
 		description: "Unlock Infinity Glyphs",
 		currencyDisplay: "IP",
 	}),
+	noCap: new GlyphUnlockState({
+		id: 3,
+		get currency() { return player.infinity.infPow; },
+		set currency(v) { player.infinity.infPow = v; },
+		cost: 1e10,
+		isUnlocked: () => InfHandler.isUnlocked,
+
+		description: "Glyph Power is uncapped",
+		currencyDisplay: "Infinity Power",
+	})
 };
 
 export const GlyphUnlockHandler = {

@@ -18,13 +18,14 @@ export const InfHandler = {
 	},
 
 	get infPowPower() {
-		return 0.4;
+		return 0.3;
 	},
 	get infPowEffect() {
 		return Math.pow(player.infinity.infPow + 1, this.infPowPower);
 	},
 
 	tick(diff: number) {
+		player.infinity.ip = Math.round(player.infinity.ip * 100) / 100;
 		while (this.progressToNext >= this.progressRequired && player.infinity.ip < 1) {
 			this.progressToNext -= this.progressRequired;
 			player.infinity.ip += 0.01;

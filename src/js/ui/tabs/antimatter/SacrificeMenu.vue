@@ -37,7 +37,7 @@ import { format, formatOrder, formatX } from "@/utils";
 		</button>
 		<template v-if="SacrificeHandler.sacAmount > SacrificeHandler.softcapThreshold">
 			<br>
-			Beyond 1e10, Sacrifice Point gain is (softcapped) to sqrt(1e10*(2*x - 1e10))
+			Beyond 1e10, Sacrifice Point gain is (softcapped) to sqrt(1e10(2x - 1e10))
 			<br>
 			<i>
 				"Capped at 1, but no one tell what does 1 mean. It can even be 1 thousand.

@@ -1,6 +1,7 @@
 import { Strikes } from "@/js/strikes";
 
 import { GlyphGenerator } from "./generator";
+import { GlyphUnlocks } from "./unlocks";
 
 import { TimeUpgrades } from "@/js/time";
 
@@ -24,7 +25,8 @@ export const GlyphHandler = {
 	},
 	tick(diff: number) {
 		if (!this.isUnlocked) return;
-		player.glyphs.glyphPower = Math.min(player.glyphs.glyphPower + this.powerPerTick * diff, 1);
+		player.glyphs.glyphPower += this.powerPerTick * diff;
+		if (!GlyphUnlocks.noCap.effect) player.glyphs.glyphPower = Math.min(player.glyphs.glyphPower, 1);
 		if (player.glyphs.glyphPower >= 1) GlyphGenerator.makeNewGlyph();
 	},
 };
