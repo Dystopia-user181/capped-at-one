@@ -43,7 +43,7 @@ const unlocks = $computed(() => player.monomensions.antimatter.maxUnlocks);
 		<br>
 	</template>
 	<template v-if="Strikes[3].isUnlocked">
-		<h2>Strike 3 (UNIMPLEMENTED)</h2>
+		<h2>Strike 3</h2>
 		Monomensions cap at one real-life second of production and Sacrifice gain and effect formula is worse
 		<br>
 		Production is spread out over 200 real-life seconds
@@ -55,18 +55,12 @@ const unlocks = $computed(() => player.monomensions.antimatter.maxUnlocks);
 		<br>
 		<br>
 	</template>
+	<template v-if="unlocks >= 8">
+		<h2>Strike 4</h2>
+		... I give up. You win.
+	</template>
 </template>
 
 <style scoped>
-.c-game-header__glyph-power {
-	font-size: 25px;
-	color: var(--colour-glyphs);
-}
 
-.c-glyph-container--projected {
-	margin: auto;
-	border: 2px solid white;
-	background-color: rgba(255, 255, 255, 0.1);
-	border-radius: 10px;
-}
 </style>

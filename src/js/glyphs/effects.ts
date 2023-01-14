@@ -1,5 +1,7 @@
 import { GlyphHandler, GlyphSacrificeHandler, GlyphType } from ".";
 
+import { InfUpgrades } from "@/js/infinity";
+
 import { player } from "@/js/player";
 
 import { format, formatPercents, formatX } from "@/utils";
@@ -90,7 +92,9 @@ export const GlyphEffects: Record<GlyphType, {
 export const GlyphEffectHandler = {
 	effectiveLevel(glyph = player.glyphs.current) {
 		if (!glyph) return 0;
-		return glyph.level * (glyph.rarity + 0.5) * GlyphSacrificeHandler.levelBoost(glyph.type);
+		return glyph.level * (glyph.rarity + 0.5) *
+			GlyphSacrificeHandler.levelBoost(glyph.type) *
+			InfUpgrades.ipBoostGlyphLevel.effectOrDefault(1);
 	},
 	getEffects(glyph = player.glyphs.current): Partial<Record<GlyphEffect, number>> {
 		if (!glyph || !GlyphHandler.isUnlocked) return {};

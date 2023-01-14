@@ -233,9 +233,9 @@ export const TimeRebuyables = (function() {
 		}),
 		tachyonEnginePow: new TimeRebuyable({
 			id: 5,
-			cost: x => Math.pow(4, x) * 1e13,
+			cost: x => Math.pow(16, x) * 1e10,
 			effect: x => 0.2 * x,
-			cap: 20,
+			cap: 5,
 			isUnlocked() { return Strikes[3].isUnlocked; },
 
 			description(upg) {

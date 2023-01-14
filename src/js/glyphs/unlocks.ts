@@ -99,6 +99,16 @@ export const GlyphUnlocks = {
 		description: "Unlock auto-discarding of Glyphs",
 		currencyDisplay: "Infinity Points",
 	}),
+	always100: new GlyphUnlockState({
+		id: 7,
+		get currency() { return player.infinity.ip; },
+		set currency(v) { player.infinity.ip = v; },
+		cost: 0.75,
+		isUnlocked: () => InfHandler.isUnlocked,
+
+		description: "Glyph Rarity is always 100%",
+		currencyDisplay: "Infinity Points",
+	}),
 };
 
 export const GlyphUnlockHandler = {

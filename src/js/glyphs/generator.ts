@@ -22,6 +22,7 @@ export const GlyphGenerator = {
 		return Math.pow(this.newLevel + 1, 2.8);
 	},
 	newRarity(type: GlyphType) {
+		if (GlyphUnlocks.always100.effect) return 1;
 		const rng = Math.random();
 		return Math.min(
 			Math.pow(rng, 0.3) * (0.35 + GlyphSacrificeHandler.rarityBoost(type)) + Math.pow(rng, 10) * 0.2,
@@ -32,7 +33,7 @@ export const GlyphGenerator = {
 		const rng = Math.random();
 		// eslint-disable-next-line no-nested-ternary
 		const rareEffectNumber = GlyphUnlocks.threeEffects.effect ? 3 : 1;
-		const rareEffectChance = GlyphUnlocks.threeEffects.effect ? 0.2 : 0.3;
+		const rareEffectChance = GlyphUnlocks.threeEffects.effect ? 0.25 : 0.3;
 		const effectsNumber = Math.min(rng < rareEffectChance ? rareEffectNumber : 2, GlyphEffects[type].length);
 		const effectsArray = Array.from(Array(GlyphEffects[type].length), (_, i) => 1 << i);
 		let effects = 0;
@@ -46,6 +47,7 @@ export const GlyphGenerator = {
 
 	makeNewGlyph(force = false) {
 		if (player.glyphs.projected) player.glyphs.projected.level = this.newLevel;
+		if (GlyphUnlocks.always100.effect && player.glyphs.projected) player.glyphs.projected.rarity = 1;
 		if (player.glyphs.projected && !force) return;
 		const type = arr(enumAsArray(GlyphType).filter(x => GlyphTypes[x].isUnlocked)).random;
 		player.glyphs.projected = {

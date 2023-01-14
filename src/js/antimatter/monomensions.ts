@@ -11,8 +11,8 @@ import { InfHandler } from "@/js/infinity";
 import { player } from "@/js/player";
 
 
-export const baseCosts = [0.1, 0.01, 1e-5, 1e-11, 1e-14, 1e-20, 1e-28, 1e-36] as const;
-const scaling = [Math.sqrt(10), 10, 100, 1e6, 1e10, 1e16, 1e18, 1e30] as const;
+export const baseCosts = [0.1, 0.01, 1e-5, 1e-11, 1e-14, 1e-20, 1e-28, 1e-99] as const;
+const scaling = [Math.sqrt(10), 10, 100, 1e6, 1e10, 1e16, 1e18, 1e90] as const;
 
 
 export class AntimatterMonomensionState extends AntimatterRebuyableState<OneToEight> {

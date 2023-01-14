@@ -45,6 +45,11 @@ const tryAscendConfirm = (function() {
 </script>
 
 <template>
+	<h1
+		v-if="player.antimatter >= AMHandler.cap && player.monomensions.antimatter.unlocks >= 8"
+	>
+		Congratulations! You've won the game
+	</h1>
 	<div>
 		You have
 		<span class="c-game-header__antimatter">

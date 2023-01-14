@@ -2,7 +2,7 @@ import { InfHandler } from ".";
 
 import { player } from "@/js/player";
 
-import { BitUpgradeState, formatX, run } from "@/utils";
+import { BitUpgradeState, formatPercents, formatX, run } from "@/utils";
 
 interface InfUpgradeConfig<E> {
 	id: number,
@@ -40,7 +40,7 @@ export const InfUpgrades = {
 	infPowBoostMomentum: new InfUpgrade({
 		id: 0,
 		cost: 0.4,
-		effect: () => Math.pow(Math.log10(player.infinity.infPow + 1), 3) / 1000 + 1,
+		effect: () => Math.pow(player.infinity.infPow / 1e24, 0.25) + 1,
 
 		title: "Boundlessly Eternal",
 		description: upg => `Infinity Power increases the momentum to IP conversion by ${formatX(upg.effect - 1)}`
@@ -53,4 +53,12 @@ export const InfUpgrades = {
 		title: "Irrational Contentness",
 		description: `Adjust IP requirement to boost IP gain by ${formatX(Math.sqrt(2))} (Sqrt of 2)`
 	}),
+	ipBoostGlyphLevel: new InfUpgrade({
+		id: 2,
+		cost: 0.7,
+		effect: () => (player.infinity.ip) / 3 + 1,
+
+		title: "Ritualistic Symbolism",
+		description: upg => `IP increases effective Glyph level by ${formatPercents(upg.effect - 1)}`
+	})
 };
