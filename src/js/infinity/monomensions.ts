@@ -16,8 +16,8 @@ export class InfinityMonomensionState extends RebuyableState<OneToEight> {
 	get amount() { return player.monomensions.infinity[this.id].amount; }
 	set amount(v: number) { player.monomensions.antimatter[this.id].amount = v; }
 
-	get bought() { return player.monomensions.antimatter[this.id].bought; }
-	set bought(v: number) { player.monomensions.antimatter[this.id].bought = v; }
+	get bought() { return player.monomensions.infinity[this.id].bought; }
+	set bought(v: number) { player.monomensions.infinity[this.id].bought = v; }
 
 	get isUnlocked() {
 		return player.infinity.bestIP >= baseCosts[this.id - 1];

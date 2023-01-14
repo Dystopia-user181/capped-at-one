@@ -55,7 +55,8 @@ export const Tabs = {
 	strikes: new TabState({
 		id: "strikes",
 		name: "Strikes",
-		component: StrikesTab
+		component: StrikesTab,
+		isUnlocked: () => player.monomensions.antimatter.maxUnlocks >= 5
 	}),
 	dilation: new TabState({
 		id: "dilation",
