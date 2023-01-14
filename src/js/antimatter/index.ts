@@ -39,6 +39,7 @@ export const AMHandler = {
 		const diffCapped = repeat === 0 ? 0 : Math.min(_diff, this.timeLeft) / repeat / (this.capAt1s ? 200 : 1);
 		for (let i = 0; i < repeat; i++) {
 			if (AntimatterMonomension("current").amount > 0 && !TimeReversal.isActive) this.timeElapsed += diffCapped;
+			if (Math.abs(this.timeElapsed - 1) < 1e-10) this.timeElapsed = 1;
 			if (this.timeLeft > 0) SurgeHandler.tick(diff);
 			const antidimDiff = TimeReversal.isActive ? -diff / (this.capAt1s ? 200 : 1) : diffCapped;
 			for (let i = 1; i <= 8; i++) {
