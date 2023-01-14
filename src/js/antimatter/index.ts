@@ -9,6 +9,9 @@ import { TimeDilationHandler, TimeReversal, TimeUpgrades } from "@/js/time";
 import { player } from "@/js/player";
 
 export const AMHandler = {
+	get postInfCap() {
+		return Strikes[3].isUnlocked && player.infinity.ip < 0.3 ? 0.1 : Infinity;
+	},
 	get cap() {
 		return 1;
 	},
@@ -36,10 +39,10 @@ export const AMHandler = {
 		if (player.antimatter >= this.cap && !TimeReversal.isActive) return;
 		const repeat = (TimeReversal.isActive || player.auto.surge) ? Math.min(Math.ceil(_diff), 100) : 1;
 		const diff = repeat === 0 ? 0 : _diff / repeat;
-		const diffCapped = repeat === 0 ? 0 : Math.min(_diff, this.timeLeft) / repeat / (this.capAt1s ? 200 : 1);
+		const diffCapped = repeat === 0 ? 0 : Math.min(_diff / (this.capAt1s ? 200 : 1), this.timeLeft) / repeat;
 		for (let i = 0; i < repeat; i++) {
 			if (AntimatterMonomension("current").amount > 0 && !TimeReversal.isActive) this.timeElapsed += diffCapped;
-			if (Math.abs(this.timeElapsed - 1) < 1e-10) this.timeElapsed = 1;
+			if (Math.abs(this.timeLeft) < 1e-5) this.timeElapsed = 1;
 			if (this.timeLeft > 0) SurgeHandler.tick(diff);
 			const antidimDiff = TimeReversal.isActive ? -diff / (this.capAt1s ? 200 : 1) : diffCapped;
 			for (let i = 1; i <= 8; i++) {
@@ -49,7 +52,7 @@ export const AMHandler = {
 					production *= AntimatterMonomension(j).multiplier * this.timeSpeedupFactor * antidimDiff /
 					(i - j + 1);
 				}
-				player.antimatter = Math.min(player.antimatter + production, this.cap);
+				player.antimatter = Math.min(Math.min(player.antimatter + production, this.cap), this.postInfCap);
 			}
 			TimeReversal.tick(diff);
 		}

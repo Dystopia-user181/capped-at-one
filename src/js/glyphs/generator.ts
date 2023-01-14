@@ -20,7 +20,10 @@ export const GlyphGenerator = {
 	},
 	newRarity(type: GlyphType) {
 		const rng = Math.random();
-		return Math.pow(rng, 0.3) * (0.35 + GlyphSacrificeHandler.rarityBoost(type)) + Math.pow(rng, 10) * 0.2;
+		return Math.min(
+			Math.pow(rng, 0.3) * (0.35 + GlyphSacrificeHandler.rarityBoost(type)) + Math.pow(rng, 10) * 0.2,
+			1
+		);
 	},
 	randomEffects(type: GlyphType) {
 		const rng = Math.random();

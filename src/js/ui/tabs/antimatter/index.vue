@@ -48,11 +48,15 @@ const tryAscendConfirm = (function() {
 	<div>
 		You have
 		<span class="c-game-header__antimatter">
-			{{ format(player.antimatter) }} / {{ format(AMHandler.cap) }}
+			{{ format(player.antimatter) }} / {{ format(Math.min(AMHandler.cap, AMHandler.postInfCap)) }}
 		</span>
 		(+{{ format(AMHandler.antimatterPerSec) }}/s) antimatter
 	</div>
 	Weight of unlocks: {{ formatX(1 / AMHandler.slowdownFactor) }} to Monomension multipliers
+	<template v-if="player.antimatter >= AMHandler.postInfCap">
+		<br>
+		Reach 0.3 IP to progress to 1.00 Antimatter
+	</template>
 	<DilationPanel />
 	<template v-if="Strikes[3].isUnlocked">
 		Time elapsed: {{ format(player.monomensions.antimatter.timeElapsed) }} / {{ format(1) }}

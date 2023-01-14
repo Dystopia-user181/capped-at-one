@@ -208,12 +208,18 @@ export const TimeRebuyables = (function() {
 		}),
 		tachyonEngine: new TimeRebuyable({
 			id: 4,
-			cost: x => Math.pow(10, Math.pow(x, 1.05)) * 100,
+			cost: x => Math.pow(10, Math.pow(x + (x >= 1 ? 2 : 0), 1.05)) * 200,
 			effect: x => x,
-			cap: 1,
+			cap: 20,
 			isUnlocked() { return Strikes[3].isUnlocked; },
 
-			description: "Unlock the Tachyon Engine"
+
+			description(upg) {
+				return upg.amount <= 0 ? "Unlock the Tachyon Engine"
+					: `Increase maximum Tachyon Engine activity level
+					<br>
+					Currently: ${formatInt(upg.effect)}`;
+			}
 		}),
 	};
 }());

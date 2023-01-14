@@ -15,7 +15,7 @@ export const TachyonEngine = {
 	get isMinLevel() { return player.time.tachyonEngine.level <= 0; },
 	get isMaxLevel() { return player.time.tachyonEngine.level >= TimeRebuyables.tachyonEngine.effect; },
 	get consumption() {
-		return (this.level <= 0 || !this.isOn) ? 0 : Math.pow(10, this.level - 1) * 0.5;
+		return (this.level <= 0 || !this.isOn) ? 0 : Math.pow(10, this.level - 1);
 	},
 	get production() {
 		let base = (this.level * this.level) / 25;

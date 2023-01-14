@@ -19,8 +19,11 @@ import { format, formatX } from "@/utils";
 		<span class="c-game-header__tachyon-particles">
 			{{ format(player.time.tachyonMatter) }}
 		</span>
-		<template v-if="TimeReversal.isActive">
+		<template v-if="TimeReversal.tpPerSec > 0">
 			(+{{ format(TimeReversal.tpPerSec) }}/s)
+		</template>
+		<template v-else-if="TimeReversal.tpPerSec < 0">
+			(-{{ format(-TimeReversal.tpPerSec) }}/s)
 		</template>
 		Tachyon Matter
 	</div>

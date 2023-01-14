@@ -16,7 +16,7 @@ export const TimeReversal = {
 	},
 
 	get tpPerSec() {
-		let base = 0.1;
+		let base = this.isActive ? 0.1 : 0;
 		base *= TimeUpgrades.tpActive.effectOrDefault(1);
 		base *= Math.pow(TimeDilationHandler.dilationFactor, TimeRebuyables.gainBasedOnDil.effect);
 		base *= GlyphEffectHandler.effectOrDefault(GlyphEffect.tachMult, 1);
@@ -37,7 +37,7 @@ export const TimeReversal = {
 				AntimatterMonomension(i).amount = 0;
 			}
 		}
-		player.time.tachyonMatter += Math.min(this.isActive ? Infinity : 0, this.tpPerSec) * diff;
+		player.time.tachyonMatter += this.tpPerSec * diff;
 		TachyonEngine.tick(diff);
 	}
 };
