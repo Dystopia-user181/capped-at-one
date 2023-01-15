@@ -33,8 +33,7 @@ export const GlyphGenerator = {
 		const rng = Math.random();
 		// eslint-disable-next-line no-nested-ternary
 		const rareEffectNumber = GlyphUnlocks.threeEffects.effect ? 3 : 1;
-		const rareEffectChance = GlyphUnlocks.threeEffects.effect ? 0.25 : 0.3;
-		const effectsNumber = Math.min(rng < rareEffectChance ? rareEffectNumber : 2, GlyphEffects[type].length);
+		const effectsNumber = Math.min(rng < 0.3 ? rareEffectNumber : 2, GlyphEffects[type].length);
 		const effectsArray = Array.from(Array(GlyphEffects[type].length), (_, i) => 1 << i);
 		let effects = 0;
 		for (let i = 0; i < effectsNumber; i++) {

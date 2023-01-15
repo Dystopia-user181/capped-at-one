@@ -26,10 +26,11 @@ import ModalWrapper from "./ModalWrapper.vue";
 			Scarlet / Dystopia181: Main dev<br>
 			<br>
 			Helpful people:<br>
-			Archadust<br>
+			Myresa<br>
 			QwQe308<br>
 			Stefan R<br>
-			Mirai
+			Mirai<br>
+			Crystalflare
 		</span>
 		<br>
 		<br>
